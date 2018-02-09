@@ -2,6 +2,15 @@
 
 ## To start dev
 
+### Dependencies
+
+- Node 8+
+
+```sh
+npm install -g babel-cli
+```
+
+
 #### Kowalski Lib
 ```sh
 yarn
