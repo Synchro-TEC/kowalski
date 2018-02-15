@@ -54,6 +54,10 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
+"@nx-js/observer-util@^4.1.1":
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/@nx-js/observer-util/-/observer-util-4.1.1.tgz#f36e49a4d3f1a4c29c9b5e6555cbc56726491ee7"
+
 acorn-jsx@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/acorn-jsx/-/acorn-jsx-3.0.1.tgz#afdf9488fb1ecefc8348f6fb22f464e32a58b36b"
@@ -1651,6 +1655,12 @@ prop-types@^15.6.0:
 pseudomap@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/pseudomap/-/pseudomap-1.0.2.tgz#f052a28da70e618917ef0a8ac34c1ae5a68286b3"
+
+react-easy-state@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/react-easy-state/-/react-easy-state-5.0.0.tgz#1f114a4695779d561cdb533a86b8fe361e0a20f0"
+  dependencies:
+    "@nx-js/observer-util" "^4.1.1"
 
 readable-stream@^2.2.2:
   version "2.3.3"

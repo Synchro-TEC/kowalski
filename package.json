@@ -39,6 +39,7 @@
     "prettier-eslint": "^8.8.1"
   },
   "dependencies": {
-    "prop-types": "^15.6.0"
+    "prop-types": "^15.6.0",
+    "react-easy-state": "^5.0.0"
   }
 }
