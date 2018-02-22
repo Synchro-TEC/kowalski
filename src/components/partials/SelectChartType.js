@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { view } from 'react-easy-state';
 
 const SelectChartType = props => {
@@ -19,6 +20,10 @@ const SelectChartType = props => {
       {buttons}
     </div>
   );
+};
+
+SelectChartType.propTypes = {
+  state: PropTypes.object,
 };
 
 export default view(SelectChartType);

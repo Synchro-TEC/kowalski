@@ -1028,9 +1028,25 @@ doctrine@^2.0.2, doctrine@^2.1.0:
   dependencies:
     esutils "^2.0.2"
 
+echarts-for-react@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/echarts-for-react/-/echarts-for-react-2.0.6.tgz#67342497b6203a8e324a10fa04a0044daa2544f3"
+  dependencies:
+    element-resize-event "2.0.9"
+
+echarts@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/echarts/-/echarts-4.0.2.tgz#c405e9e479af982383c8ae2b5946e52d058c6220"
+  dependencies:
+    zrender "4.0.1"
+
 electron-to-chromium@^1.3.30:
   version "1.3.33"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.33.tgz#bf00703d62a7c65238136578c352d6c5c042a545"
+
+element-resize-event@2.0.9:
+  version "2.0.9"
+  resolved "https://registry.yarnpkg.com/element-resize-event/-/element-resize-event-2.0.9.tgz#2f5e1581a296eb5275210c141bc56342e218f876"
 
 encoding@^0.1.11:
   version "0.1.12"
@@ -1503,7 +1519,7 @@ lodash.unescape@4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/lodash.unescape/-/lodash.unescape-4.0.1.tgz#bf2249886ce514cda112fae9218cdc065211fc9c"
 
-lodash@^4.17.4, lodash@^4.2.0, lodash@^4.3.0:
+lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.0, lodash@^4.3.0:
   version "4.17.5"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.5.tgz#99a92d65c0272debe8c96b6057bc8fbfa3bed511"
 
@@ -2021,3 +2037,7 @@ write@^0.2.1:
 yallist@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-2.1.2.tgz#1c11f9218f076089a47dd512f93c6699a6a81d52"
+
+zrender@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/zrender/-/zrender-4.0.1.tgz#961e77abc5042eaa624b5230f8d673bf648298e9"
