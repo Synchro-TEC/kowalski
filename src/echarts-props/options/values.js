@@ -6,5 +6,8 @@ export default {
     horizontalAlign: ['left', 'center', 'right'],
     verticalAlign: ['top', 'middle', 'bottom'],
   },
+  title: {
+    left: ['left', 'center', 'right'],
+  },
   link: { target: ['blank', 'self'] },
 };

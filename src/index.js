@@ -8,26 +8,27 @@ import Styledmain from './components/ui/main';
 import ReactEcharts from 'echarts-for-react';
 import echarts from 'echarts';
 import titleProps from './echarts-props/title';
+import gridProps from './echarts-props/grid';
 import _set from 'lodash/set';
 import SelectChartType from './components/partials/SelectChartType';
 import TitleOptions from './components/partials/title/titleOptions';
+import GridOptions from './components/partials/grid/gridOptions';
+// import JSONTree from 'react-json-tree';
 
-const data1 = [
-  { month: 'Jan', value: 252 },
-  { month: 'Fev', value: 212 },
-  { month: 'Mar', value: 282 },
-  { month: 'Abr', value: 233 },
-  { month: 'Mai', value: 127 },
-  { month: 'Jun', value: 320 },
-];
+const data1 = [];
 
 let state = store({
   charts: ['A', 'B', 'C'],
+  data: [],
   chart: {
     title: titleProps,
+    grid: gridProps,
   },
   setValue: (key, val) => {
     _set(state, key, val);
+  },
+  setData: data => {
+    state.data = data;
   },
   selectedChart: null,
   setChartType: type => {
@@ -36,20 +37,54 @@ let state = store({
   getOptions: _ => {
     return {
       title: state.chart.title,
+      grid: state.chart.grid,
+      legend: {
+        data: data1.map(d => d.value),
+      },
+      toolbox: {
+        right: 20,
+        feature: {
+          restore: {
+            show: true,
+            title: 'Reiniciar',
+          },
+          magicType: {
+            type: ['bar', 'line'],
+            title: {
+              bar: 'Barras',
+              line: 'Linhas',
+            },
+          },
+          // dataView: {
+          //   title: 'Dados',
+          // },
+          saveAsImage: {
+            title: 'Salvar',
+            pixelRatio: 2,
+          },
+        },
+      },
       xAxis: [
         {
           show: true,
-          type: 'time',
-          name: 'Date',
+          type: 'category',
+          name: 'Mes',
           gridIndex: 0,
+          data: data1.map(d => d.month),
           position: 'bottom',
+          splitLine: {
+            show: false,
+          },
         },
       ],
       yAxis: [
         {
           show: true,
           type: 'value',
-          name: 'my axis',
+          name: 'Total',
+          splitLine: {
+            show: false,
+          },
         },
       ],
       series: [
@@ -57,47 +92,7 @@ let state = store({
           type: 'line',
           xAxisIndex: 0,
           yAxisIndex: 0,
-          data: [
-            [1509762600, 7.11376],
-            [1509766200, 7.13389],
-            [1509832200, 7.53564],
-            [1509832800, 7.54459],
-            [1509834000, 7.54566],
-            [1509835200, 7.55541],
-            [1509849000, 7.64559],
-          ],
-          markLine: {
-            data: [
-              // 1st line we want to draw
-              [
-                // start point of the line
-                // we have to defined line attributes only here (not in the end point)
-                {
-                  xAxis: 1509762600,
-                  yAxis: 3,
-                  symbol: 'none',
-                  lineStyle: {
-                    normal: {
-                      color: '#00F',
-                    },
-                  },
-                  label: {
-                    normal: {
-                      show: true,
-                      position: 'end',
-                      formatter: 'my label',
-                    },
-                  },
-                },
-                // end point of the line
-                {
-                  xAxis: 1509849000,
-                  yAxis: 3,
-                  symbol: 'none',
-                },
-              ],
-            ],
-          },
+          data: data1,
         },
       ],
     };
@@ -119,6 +114,10 @@ class Kowalski extends Component {
     super(props);
   }
 
+  componentDidMount() {
+    state.setData(this.props.data);
+  }
+
   render() {
     return (
       <Maincontainer>
@@ -126,6 +125,7 @@ class Kowalski extends Component {
           <Aside>
             {this.props.allowSelectChart ? <SelectChartType state={state} /> : ''}
             <TitleOptions state={state} />
+            <GridOptions state={state} />
           </Aside>
           <Article>
             <h2>{this.props.appName}</h2>

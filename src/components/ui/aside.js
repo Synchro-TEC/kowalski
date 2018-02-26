@@ -6,8 +6,8 @@ const Styledaside = styled.aside`
   -webkit-box-flex: 1;
   -o-box-flex: 1;
   box-flex: 1;
-  -ms-flex: 0 0 200px;
-  flex: 0 0 230px;
+  -ms-flex: 0 0 260px;
+  flex: 0 0 260px;
   background: #f7f7f7;
 `;
 

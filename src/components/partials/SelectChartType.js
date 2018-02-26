@@ -15,7 +15,7 @@ const SelectChartType = props => {
   ));
 
   return (
-    <div>
+    <div style={{ borderBottom: '1px solid #ccc' }} className="sv-pa--10">
       <p>Selected Chart: {props.state.selectedChart}</p>
       {buttons}
     </div>
