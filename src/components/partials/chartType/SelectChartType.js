@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { view } from 'react-easy-state';
 
 const SelectChartType = props => {
-  const buttons = props.state.charts.map(chart => (
+  const buttons = props.store.charts.map(chart => (
     <button
       className="sv-button small default"
-      onClick={e => props.state.setChartType(e.target.value)}
+      onClick={e => props.store.setChartType(e.target.value)}
       value={chart}
       key={`chart-${chart}`}
     >
@@ -16,14 +16,14 @@ const SelectChartType = props => {
 
   return (
     <div style={{ borderBottom: '1px solid #ccc' }} className="sv-pa--10">
-      <p>Selected Chart: {props.state.selectedChart}</p>
+      <p>Selected Chart: {props.store.selectedChart}</p>
       {buttons}
     </div>
   );
 };
 
 SelectChartType.propTypes = {
-  state: PropTypes.object,
+  store: PropTypes.object,
 };
 
 export default view(SelectChartType);

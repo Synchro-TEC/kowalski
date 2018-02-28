@@ -5,9 +5,35 @@ import toolboxProps from '../echarts-props/toolbox';
 import legendProps from '../echarts-props/legend';
 import _set from 'lodash/set';
 
+const prepareData = data => {
+  let vals = {};
+  let mapped = false;
+  for (let i = 0; i < data.length; i++) {
+    if (!mapped) {
+      Object.keys(data[i]).map(key => (vals[key] = []));
+      mapped = true;
+    }
+
+    for (let val in data[i]) {
+      if (
+        data[i].hasOwnProperty(val) &&
+        !Array.isArray(val) &&
+        Object.prototype.toString.call(val) !== '[object Object]'
+      ) {
+        vals[val].push(data[i][val]);
+      }
+    }
+  }
+  return vals;
+};
+
+let originalData;
+let series;
+
 let Store = store({
   charts: ['A', 'B', 'C'],
-  data: {},
+  columns: [],
+  series: null,
   chart: {
     title: titleProps,
     grid: gridProps,
@@ -18,7 +44,9 @@ let Store = store({
     _set(Store, key, val);
   },
   setData: data => {
-    Store.data = data;
+    originalData = data;
+    series = prepareData(data);
+    Store.columns = Object.keys(data[0]);
   },
   selectedChart: null,
   setChartType: type => {

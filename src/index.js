@@ -7,10 +7,11 @@ import Article from './components/ui/article';
 import Styledmain from './components/ui/main';
 import ReactEcharts from 'echarts-for-react';
 import echarts from 'echarts';
-import SelectChartType from './components/partials/SelectChartType';
+import SelectChartType from './components/partials/chartType/SelectChartType';
 import TitleOptions from './components/partials/title/titleOptions';
 import GridOptions from './components/partials/grid/gridOptions';
 import Store from './store/mainStore';
+import Series from './components/partials/series/series';
 
 const Maincontainer = styled.div`
   height: 100%;
@@ -36,14 +37,15 @@ class Kowalski extends Component {
       <Maincontainer>
         <Styledmain>
           <Aside>
-            {this.props.allowSelectChart ? <SelectChartType state={Store} /> : ''}
+            {this.props.allowSelectChart ? <SelectChartType store={Store} /> : ''}
             <TitleOptions state={Store} />
             <GridOptions state={Store} />
+            <Series store={Store} />
           </Aside>
           <Article>
             <h2>{this.props.appName}</h2>
             <ReactEcharts option={Store.getOptions()} echarts={echarts} />
-            <pre>{JSON.stringify(Store.chart, null, 2)}</pre>
+            <pre>{JSON.stringify(Store, null, 2)}</pre>
           </Article>
           <Aside />
         </Styledmain>
