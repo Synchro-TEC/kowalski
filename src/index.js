@@ -9,6 +9,7 @@ import ReactEcharts from 'echarts-for-react';
 import echarts from 'echarts';
 import SelectChartType from './components/partials/chartType/SelectChartType';
 import TitleOptions from './components/partials/title/titleOptions';
+import LegendOptions from './components/partials/legend/legendOptions';
 import GridOptions from './components/partials/grid/gridOptions';
 import Store from './store/mainStore';
 import Series from './components/partials/series/series';
@@ -54,11 +55,12 @@ class Kowalski extends Component {
               echarts={echarts}
               onEvents={onEvents}
               style={{ height: '500px' }}
-              opts={{ renderer: 'svg' }}
             />
             <pre style={{ display: 'none' }}>{JSON.stringify(Store, null, 2)}</pre>
           </Article>
-          <Aside />
+          <Aside>
+            <LegendOptions store={Store} />
+          </Aside>
         </Styledmain>
       </Maincontainer>
     );

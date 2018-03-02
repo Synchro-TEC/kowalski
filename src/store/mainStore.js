@@ -37,14 +37,14 @@ let data = [
   { bla: 'Dom', vv: 120, color: 'rgba(130, 127, 58, 1)' },
 ];
 
-const legendData = data.map(d => d['bla']);
+// const legendData = data.map(d => d['bla']);
 const seriesData = data.map(d => {
   return { name: d['bla'], value: d['vv'], itemStyle: { color: d['color'] } };
 });
 
 let originalData;
 let series;
-
+legendProps.data = data.map(d => d['bla']);
 let Store = store({
   charts: ['A', 'B', 'C'],
   columns: [],
@@ -73,6 +73,10 @@ let Store = store({
       grid: Store.chart.grid,
       legend: Store.chart.legend,
       toolbox: Store.chart.toolbox,
+      tooltip: {
+        trigger: 'item',
+        formatter: '{a} <br/>{b} : {c} ({d}%)',
+      },
       series: [
         {
           name: 'Obrigação',
