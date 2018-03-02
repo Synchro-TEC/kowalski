@@ -27,6 +27,21 @@ const prepareData = data => {
   return vals;
 };
 
+let data = [
+  { bla: 'Seg', vv: 720, color: 'rgba(230, 207, 58, 1)' },
+  { bla: 'Ter', vv: 620, color: 'rgba(59, 97, 158, 1)' },
+  { bla: 'Qua', vv: 520, color: 'rgba(200, 88, 58, 1)' },
+  { bla: 'Qui', vv: 420, color: 'rgba(190, 227, 158, 1)' },
+  { bla: 'Sex', vv: 320, color: 'rgba(200, 107, 158, 1)' },
+  { bla: 'Sab', vv: 220, color: 'rgba(230, 27, 58, 1)' },
+  { bla: 'Dom', vv: 120, color: 'rgba(130, 127, 58, 1)' },
+];
+
+const legendData = data.map(d => d['bla']);
+const seriesData = data.map(d => {
+  return { name: d['bla'], value: d['vv'], itemStyle: { color: d['color'] } };
+});
+
 let originalData;
 let series;
 
@@ -58,35 +73,18 @@ let Store = store({
       grid: Store.chart.grid,
       legend: Store.chart.legend,
       toolbox: Store.chart.toolbox,
-      xAxis: [
-        {
-          show: true,
-          type: 'category',
-          name: 'Mes',
-          gridIndex: 0,
-          data: [],
-          position: 'bottom',
-          splitLine: {
-            show: false,
-          },
-        },
-      ],
-      yAxis: [
-        {
-          show: true,
-          type: 'value',
-          name: 'Total',
-          splitLine: {
-            show: false,
-          },
-        },
-      ],
       series: [
         {
-          type: 'line',
-          xAxisIndex: 0,
-          yAxisIndex: 0,
-          data: [],
+          name: 'Obrigação',
+          radius: ['40%', '65%'],
+          center: ['50%', '50%'],
+          itemStyle: {
+            opacity: 0.9,
+            borderWidth: 2,
+            borderColor: '#fff',
+          },
+          data: seriesData,
+          type: 'pie',
         },
       ],
     };
@@ -94,3 +92,66 @@ let Store = store({
 });
 
 export default Store;
+
+//EXEMPLO GRAFICO PIZZA
+
+/**
+
+ let data = [
+ {bla: 'Seg', vv: 720, color: "rgba(230, 207, 58, 1)"},
+ {bla: 'Ter', vv: 620, color: "rgba(59, 97, 158, 1)"},
+ {bla: 'Qua', vv: 520, color: "rgba(200, 88, 58, 1)"},
+ {bla: 'Qui', vv: 420, color: "rgba(190, 227, 158, 1)"},
+ {bla: 'Sex', vv: 320, color: "rgba(200, 107, 158, 1)"},
+ {bla: 'Sab', vv: 220, color: "rgba(230, 27, 58, 1)"},
+ {bla: 'Dom', vv: 120, color: "rgba(130, 127, 58, 1)"}
+ ];
+
+ var legendData = data.map(d => d['bla']);
+ var seriesData = data.map(d => {return {name: d['bla'], value: d['vv'], itemStyle: {color:d['color']}}});
+ // debugger;
+ option = {
+    title : {
+        text: 'Teste',
+        subtext: 'asd asd asd ',
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        type: 'scroll',
+        orient: 'vertical',
+        right: 50,
+        top: 50,
+        bottom: 20,
+        data: legendData
+    },
+    series: [
+        {
+            name: 'Obrigação',
+            radius : ['40%', '65%'],
+            // radius : '65%',
+            center: ['50%', '50%'],
+            itemStyle: {
+                opacity: 0.9,
+                borderWidth: 2,
+                borderColor: '#fff'
+            },
+            // itemStyle: {
+            //     emphasis: {
+            //         shadowBlur: 10,
+            //         shadowOffsetX: 0,
+            //         shadowColor: 'rgba(0, 0, 0, 0.5)'
+            //     }
+            // },
+            data: seriesData,
+            type: 'pie'
+        }
+
+    ]
+};
+
+
+ **/

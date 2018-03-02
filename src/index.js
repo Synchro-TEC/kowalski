@@ -33,6 +33,11 @@ class Kowalski extends Component {
   }
 
   render() {
+    let onEvents = {
+      click: args => console.log(args),
+      legendselectchanged: args => console.log(args),
+    };
+
     return (
       <Maincontainer>
         <Styledmain>
@@ -44,8 +49,14 @@ class Kowalski extends Component {
           </Aside>
           <Article>
             <h2>{this.props.appName}</h2>
-            <ReactEcharts option={Store.getOptions()} echarts={echarts} />
-            <pre>{JSON.stringify(Store, null, 2)}</pre>
+            <ReactEcharts
+              option={Store.getOptions()}
+              echarts={echarts}
+              onEvents={onEvents}
+              style={{ height: '500px' }}
+              opts={{ renderer: 'svg' }}
+            />
+            <pre style={{ display: 'none' }}>{JSON.stringify(Store, null, 2)}</pre>
           </Article>
           <Aside />
         </Styledmain>

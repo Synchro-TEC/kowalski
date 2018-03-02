@@ -33,6 +33,7 @@ const TitleOptions = props => {
           value={props.state.chart.title.text}
           onChange={e => props.state.setValue('chart.title.text', e.target.value)}
         />
+        <ColorPicker color={props.state.chart.title.textStyle.color} handleChange={setTextColor} />
       </label>
       <p>
         Subtitulo:{' '}
@@ -41,13 +42,8 @@ const TitleOptions = props => {
           value={props.state.chart.title.subtext}
           onChange={e => props.state.setValue('chart.title.subtext', e.target.value)}
         />
+        <ColorPicker color={props.state.chart.title.subtextStyle.color} handleChange={setSubtextColor} />
       </p>
-      <div>
-        Color: <ColorPicker color={props.state.chart.title.textStyle.color} handleChange={setTextColor} />
-      </div>
-      <div>
-        Color: <ColorPicker color={props.state.chart.title.subtextStyle.color} handleChange={setSubtextColor} />
-      </div>
       <p>Position</p>
       <p>{positionButtons}</p>
     </div>
