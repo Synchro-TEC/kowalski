@@ -51,12 +51,13 @@ class Kowalski extends Component {
           <Article>
             <h2>{this.props.appName}</h2>
             <ReactEcharts
+              notMerge={true}
               option={Store.getOptions()}
               echarts={echarts}
               onEvents={onEvents}
               style={{ height: '500px' }}
             />
-            <pre style={{ display: 'none' }}>{JSON.stringify(Store, null, 2)}</pre>
+            <pre>{JSON.stringify(Store.getOptions().legend, null, 2)}</pre>
           </Article>
           <Aside>
             <LegendOptions store={Store} />

@@ -31,7 +31,7 @@ export default {
     shadowOffsetX: 0,
     shadowOffsetY: 0,
   },
-  padding: 5,
+  padding: [0, 0, 0, 0],
   itemGap: 10,
   itemWidth: 25,
   itemHeight: 14,

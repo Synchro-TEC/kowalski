@@ -4,6 +4,10 @@ import { view } from 'react-easy-state';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import Values from '../../../echarts-props/options/values';
+import ElementPadding from '../../ui/elementPadding';
+import AreaTitle from '../../ui/areaTitle';
+import AreaSubTitle from '../../ui/areaSubTitle';
+import Switcher from '../../ui/switcher';
 // type: 'scroll',
 //   orient: 'vertical',
 //   right: 50,
@@ -21,41 +25,44 @@ const LegendOptions = props => {
     />
   ));
 
+  const changePadding = values => {
+    props.store.setValue('chart.legend.padding', values);
+  };
+
+  // props.store.chart.legend.padding.slice();
   return (
-    <div className="sv-form sv-pa--10" style={{ borderBottom: '1px solid #ccc' }}>
-      <div>
-        Tipo da legenda:{' '}
-        <Select
-          onChange={e => props.store.setValue('chart.legend.type', e.value)}
-          options={Values.legend.type}
-          value={props.store.chart.legend.type}
-        />
+    <div style={{ borderBottom: '1px solid #ccc' }}>
+      <AreaTitle>Legenda</AreaTitle>
+      <AreaSubTitle>Visualização</AreaSubTitle>
+      <div className="sv-pb--10">
+        <div className="sv-pa--5">
+          Tipo da legenda:{' '}
+          <Select
+            onChange={e => props.store.setValue('chart.legend.type', e.value)}
+            options={Values.legend.type}
+            value={props.store.chart.legend.type}
+            clearable={false}
+          />
+        </div>
+        <div className="sv-pa--5">
+          Orientação:{' '}
+          <Select
+            onChange={e => props.store.setValue('chart.legend.orient', e.value)}
+            options={Values.legend.orient}
+            value={props.store.chart.legend.orient}
+            clearable={false}
+          />
+        </div>
+        <Switcher />
       </div>
-      <div>
-        Orientação:{' '}
-        <Select
-          onChange={e => props.store.setValue('chart.legend.orient', e.value)}
-          options={Values.legend.orient}
-          value={props.store.chart.legend.orient}
-        />
+
+      <AreaSubTitle>Alinhamento</AreaSubTitle>
+      <div className="sv-pa--5">{positionButtons}</div>
+
+      <AreaSubTitle>Margens</AreaSubTitle>
+      <div className="sv-form sv-pa--5">
+        <ElementPadding values={props.store.chart.legend.padding} handlerChange={changePadding} />
       </div>
-      <div>
-        Superior:{' '}
-        <input
-          type="text"
-          value={props.store.chart.legend.top}
-          onChange={e => props.store.setValue('chart.legend.top', e.target.value)}
-        />
-      </div>
-      <div>
-        Inferior:{' '}
-        <input
-          type="text"
-          value={props.store.chart.legend.bottom}
-          onChange={e => props.store.setValue('chart.legend.bottom', e.target.value)}
-        />
-      </div>
-      <div>{positionButtons}</div>
     </div>
   );
 };

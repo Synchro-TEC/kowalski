@@ -8,7 +8,7 @@ const Styledarticle = styled.article`
   box-flex: 2;
   -ms-flex: 2;
   flex: 2;
-  background: #f0eeee;
+  background: #fff;
 `;
 
 const Article = props => {

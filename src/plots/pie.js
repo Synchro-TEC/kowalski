@@ -25,8 +25,8 @@ export default {
         center: ['50%', '50%'],
         itemStyle: {
           opacity: 0.9,
-          borderWidth: 2,
-          borderColor: '#fff',
+          // borderWidth: 2,
+          // borderColor: '#fff',
         },
         data: [],
         type: 'pie',
