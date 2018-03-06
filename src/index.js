@@ -44,7 +44,7 @@ class Kowalski extends Component {
         <Styledmain>
           <Aside>
             {this.props.allowSelectChart ? <SelectChartType store={Store} /> : ''}
-            <TitleOptions state={Store} />
+            <TitleOptions store={Store} />
             <GridOptions state={Store} />
             <Series store={Store} />
           </Aside>
@@ -57,7 +57,7 @@ class Kowalski extends Component {
               onEvents={onEvents}
               style={{ height: '500px' }}
             />
-            <pre>{JSON.stringify(Store.getOptions().legend, null, 2)}</pre>
+            <pre style={{ display: 'none' }}>{JSON.stringify(Store.getOptions(), null, 2)}</pre>
           </Article>
           <Aside>
             <LegendOptions store={Store} />

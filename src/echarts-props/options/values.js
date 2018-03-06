@@ -9,6 +9,11 @@ export default {
   title: {
     left: ['left', 'center', 'right'],
   },
+  align: [
+    { label: 'Esquerda', value: 'left' },
+    { label: 'Centro', value: 'center' },
+    { label: 'Direita', value: 'right' },
+  ],
   link: { target: ['blank', 'self'] },
   legend: {
     type: [{ label: 'Simples', value: 'plain' }, { label: 'Paginada', value: 'scroll' }],

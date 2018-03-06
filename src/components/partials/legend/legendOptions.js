@@ -8,61 +8,70 @@ import ElementPadding from '../../ui/elementPadding';
 import AreaTitle from '../../ui/areaTitle';
 import AreaSubTitle from '../../ui/areaSubTitle';
 import Switcher from '../../ui/switcher';
-// type: 'scroll',
-//   orient: 'vertical',
-//   right: 50,
-//   top: 50,
-//   bottom: 20,
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
+
 const LegendOptions = props => {
-  const positionButtons = Values.title.left.map((val, i) => (
-    <input
-      type="radio"
-      name="legendPosition"
-      key={`tpb=${i}`}
-      value={val}
-      checked={props.store.chart.legend.left === val}
-      onChange={e => props.store.setValue('chart.legend.left', e.target.value)}
-    />
-  ));
+  const changeLegendPosition = value => {
+    props.store.setValue('chart.legend.left', value);
+  };
 
   const changePadding = values => {
     props.store.setValue('chart.legend.padding', values);
   };
 
-  // props.store.chart.legend.padding.slice();
+  const changeOrientation = value => {
+    props.store.setValue('chart.legend.orient', value);
+  };
+
+  const changeType = value => {
+    props.store.setValue('chart.legend.type', value);
+  };
+
   return (
     <div style={{ borderBottom: '1px solid #ccc' }}>
       <AreaTitle>Legenda</AreaTitle>
-      <AreaSubTitle>Visualização</AreaSubTitle>
-      <div className="sv-pb--10">
-        <div className="sv-pa--5">
-          Tipo da legenda:{' '}
-          <Select
-            onChange={e => props.store.setValue('chart.legend.type', e.value)}
-            options={Values.legend.type}
-            value={props.store.chart.legend.type}
-            clearable={false}
-          />
-        </div>
-        <div className="sv-pa--5">
-          Orientação:{' '}
-          <Select
-            onChange={e => props.store.setValue('chart.legend.orient', e.value)}
-            options={Values.legend.orient}
-            value={props.store.chart.legend.orient}
-            clearable={false}
-          />
-        </div>
-        <Switcher />
-      </div>
 
-      <AreaSubTitle>Alinhamento</AreaSubTitle>
-      <div className="sv-pa--5">{positionButtons}</div>
+      <Tabs>
+        <TabList>
+          <Tab>Exibição</Tab>
+          <Tab>Posição</Tab>
+          <Tab>Margens</Tab>
+        </TabList>
 
-      <AreaSubTitle>Margens</AreaSubTitle>
-      <div className="sv-form sv-pa--5">
-        <ElementPadding values={props.store.chart.legend.padding} handlerChange={changePadding} />
-      </div>
+        <TabPanel>
+          <div className="sv-pa--5">
+            <Switcher
+              fields={Values.legend.type}
+              title="Exibição"
+              currentValue={props.store.chart.legend.type}
+              changeHandler={changeType}
+            />
+            <Switcher
+              fields={Values.legend.orient}
+              title="Orientação"
+              currentValue={props.store.chart.legend.orient}
+              changeHandler={changeOrientation}
+            />
+          </div>
+        </TabPanel>
+
+        <TabPanel>
+          <div className="sv-pa--5">
+            <Switcher
+              fields={Values.align}
+              title="Posição"
+              currentValue={props.store.chart.legend.left}
+              changeHandler={changeLegendPosition}
+            />
+          </div>
+        </TabPanel>
+        <TabPanel>
+          <div className="sv-form sv-pa--5">
+            <ElementPadding values={props.store.chart.legend.padding} handlerChange={changePadding} />
+          </div>
+        </TabPanel>
+      </Tabs>
     </div>
   );
 };
