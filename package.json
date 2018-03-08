@@ -44,6 +44,7 @@
     "lodash": "^4.17.5",
     "nanoid": "^1.0.2",
     "prop-types": "^15.6.0",
+    "react-animate-height": "^0.10.10",
     "react-color": "^2.13.8",
     "react-easy-state": "^5.0.0",
     "react-json-tree": "^0.11.0",

@@ -2,11 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledTitle = styled.h5`
-  background: #d3dce7;
-  padding: 5px;
+  background: #eaecf1;
+  padding: 10px 5px;
   font-weight: 400;
-  margin: 0 0 10px 0;
+  margin: 0;
   text-align: center;
+  font-size: 14px;
 `;
 
 const AreaTitle = props => {

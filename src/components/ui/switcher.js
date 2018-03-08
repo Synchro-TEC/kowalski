@@ -5,6 +5,7 @@ import nanoid from 'nanoid';
 
 const SwitchField = styled.div`
   overflow: hidden;
+  margin: 0 0 10px 0;
 
   input {
     position: absolute !important;
@@ -54,7 +55,7 @@ const SwitchField = styled.div`
 `;
 
 const SwitchFieldTitle = styled.div`
-  margin-bottom: 3px;
+  margin-bottom: 0px;
 `;
 
 const FlexContainer = styled.div`

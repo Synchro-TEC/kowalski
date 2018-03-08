@@ -5,11 +5,11 @@ import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import Values from '../../../echarts-props/options/values';
 import ElementPadding from '../../ui/elementPadding';
+import Area from '../../ui/area';
 import AreaTitle from '../../ui/areaTitle';
-import AreaSubTitle from '../../ui/areaSubTitle';
 import Switcher from '../../ui/switcher';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
+// import 'react-tabs/style/react-tabs.css';
 
 const LegendOptions = props => {
   const changeLegendPosition = value => {
@@ -29,7 +29,7 @@ const LegendOptions = props => {
   };
 
   return (
-    <div style={{ borderBottom: '1px solid #ccc' }}>
+    <Area>
       <AreaTitle>Legenda</AreaTitle>
 
       <Tabs>
@@ -40,7 +40,7 @@ const LegendOptions = props => {
         </TabList>
 
         <TabPanel>
-          <div className="sv-pa--5">
+          <div className="sv-pa--15 sv-bg-color--white-1">
             <Switcher
               fields={Values.legend.type}
               title="Exibição"
@@ -57,7 +57,7 @@ const LegendOptions = props => {
         </TabPanel>
 
         <TabPanel>
-          <div className="sv-pa--5">
+          <div className="sv-pa--15 sv-bg-color--white-1">
             <Switcher
               fields={Values.align}
               title="Posição"
@@ -67,12 +67,12 @@ const LegendOptions = props => {
           </div>
         </TabPanel>
         <TabPanel>
-          <div className="sv-form sv-pa--5">
+          <div className="sv-form sv-pa--15 sv-bg-color--white-1">
             <ElementPadding values={props.store.chart.legend.padding} handlerChange={changePadding} />
           </div>
         </TabPanel>
       </Tabs>
-    </div>
+    </Area>
   );
 };
 

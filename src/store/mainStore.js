@@ -67,7 +67,12 @@ let originalData;
 let series;
 legendProps.data = data.map(d => d['bla']);
 let Store = store({
-  charts: ['A', 'B', 'C'],
+  resize: false,
+  plots: [
+    { id: 'line', title: 'Linha', icon: 'line.png' },
+    { id: 'bar', title: 'Barras', icon: 'bar.png' },
+    { id: 'pie', title: 'Pizza', icon: 'pizza.png' },
+  ],
   columns: [],
   series: null,
   chart: {
@@ -75,6 +80,9 @@ let Store = store({
     grid: gridProps,
     toolbox: toolboxProps,
     legend: legendProps,
+  },
+  onResize: _ => {
+    Store.resize = !Store.resize;
   },
   setValue: (key, val) => {
     _set(Store, key, val);
@@ -84,9 +92,9 @@ let Store = store({
     series = prepareData(data);
     Store.columns = Object.keys(data[0]);
   },
-  selectedChart: null,
-  setChartType: type => {
-    Store.selectedChart = type;
+  selectedPlot: null,
+  setPlot: plot => {
+    Store.selectedPlot = plot;
   },
   getOptions: _ => {
     return {
@@ -101,7 +109,7 @@ let Store = store({
       series: [
         {
           name: 'Obrigação',
-          radius: ['40%', '65%'],
+          radius: ['30%', '50%'],
           center: ['50%', '50%'],
           itemStyle: {
             emphasis: {

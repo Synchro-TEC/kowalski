@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import { view } from 'react-easy-state';
 import Values from '../../../echarts-props/options/values';
 import ColorPicker from '../../ui/colorPicker';
+import Area from '../../ui/area';
+import AreaTitle from '../../ui/areaTitle';
 import Switcher from '../../ui/switcher';
+import ElementPadding from '../../ui/elementPadding';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 const TitleOptions = props => {
   const setTextColor = color => {
@@ -18,35 +22,65 @@ const TitleOptions = props => {
     props.store.setValue('chart.title.left', value);
   };
 
+  const changePadding = values => {
+    props.store.setValue('chart.title.padding', values);
+  };
+
   return (
-    <div className="sv-form sv-pa--10" style={{ borderBottom: '1px solid #ccc' }}>
-      <label>
-        Titulo:{' '}
-        <input
-          type="text"
-          value={props.store.chart.title.text}
-          onChange={e => props.store.setValue('chart.title.text', e.target.value)}
-        />
-        <ColorPicker color={props.store.chart.title.textStyle.color} handleChange={setTextColor} />
-      </label>
-      <div>
-        Subtitulo:{' '}
-        <input
-          type="text"
-          value={props.store.chart.title.subtext}
-          onChange={e => props.store.setValue('chart.title.subtext', e.target.value)}
-        />
-        <ColorPicker color={props.store.chart.title.subtextStyle.color} handleChange={setSubtextColor} />
-      </div>
-      <div className="sv-pa--5">
-        <Switcher
-          fields={Values.align}
-          title="Posição"
-          currentValue={props.store.chart.title.left}
-          changeHandler={setTitlePosition}
-        />
-      </div>
-    </div>
+    <Area>
+      <AreaTitle>Títulos</AreaTitle>
+      <Tabs>
+        <TabList>
+          <Tab>Texto</Tab>
+          <Tab>Formatação</Tab>
+          <Tab>Margens</Tab>
+        </TabList>
+        <TabPanel>
+          <div className="sv-form sv-pa--15">
+            <label>
+              Titulo:
+              <input
+                type="text"
+                value={props.store.chart.title.text}
+                onChange={e => props.store.setValue('chart.title.text', e.target.value)}
+              />
+            </label>
+
+            <label>
+              Subtitulo:
+              <textarea
+                type="text"
+                value={props.store.chart.title.subtext}
+                onChange={e => props.store.setValue('chart.title.subtext', e.target.value)}
+              />
+            </label>
+          </div>
+        </TabPanel>
+        <TabPanel>
+          <div className="sv-form sv-pa--15">
+            <label>
+              Cor do título:
+              <ColorPicker color={props.store.chart.title.textStyle.color} handleChange={setTextColor} />
+            </label>
+            <label>
+              Cor do Subtítulo:
+              <ColorPicker color={props.store.chart.title.subtextStyle.color} handleChange={setSubtextColor} />
+            </label>
+            <Switcher
+              fields={Values.align}
+              title="Alinhamento"
+              currentValue={props.store.chart.title.left}
+              changeHandler={setTitlePosition}
+            />
+          </div>
+        </TabPanel>
+        <TabPanel>
+          <div className="sv-form sv-pa--15">
+            <ElementPadding values={props.store.chart.title.padding} handlerChange={changePadding} />
+          </div>
+        </TabPanel>
+      </Tabs>
+    </Area>
   );
 };
 

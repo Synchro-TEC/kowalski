@@ -42,7 +42,7 @@ export default {
     textShadowOffsetX: 0,
     textShadowOffsetY: 0,
   },
-  padding: 5,
+  padding: [20, 100, 20, 100],
   itemGap: 10,
   zlevel: 0,
   z: 2,

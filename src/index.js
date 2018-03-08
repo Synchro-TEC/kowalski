@@ -7,7 +7,7 @@ import Article from './components/ui/article';
 import Styledmain from './components/ui/main';
 import ReactEcharts from 'echarts-for-react';
 import echarts from 'echarts';
-import SelectChartType from './components/partials/chartType/SelectChartType';
+import SelectChartType from './components/partials/chartType/selectChartType';
 import TitleOptions from './components/partials/title/titleOptions';
 import LegendOptions from './components/partials/legend/legendOptions';
 import GridOptions from './components/partials/grid/gridOptions';
@@ -24,13 +24,46 @@ const Maincontainer = styled.div`
   display: flex;
 `;
 
+const ChartBox = styled.div`
+  border: 1px solid #ccc;
+  box-shadow: 0px 4px 8px -3px rgba(17, 17, 17, 0.1);
+  background: #fff;
+`;
+
 class Kowalski extends Component {
   constructor(props) {
     super(props);
+
+    this.sizes = {
+      articlePadding: 10,
+      titleMarginTop: 3.5,
+      titleMarginBottom: 20,
+      titleHeight: 30,
+    };
+
+    this._fireResize = this._fireResize.bind(this);
+  }
+
+  _fireResize() {
+    Store.onResize();
   }
 
   componentDidMount() {
     Store.setData(this.props.data);
+    window.addEventListener('resize', this._fireResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._fireResize);
+  }
+
+  _calcChartHeight() {
+    const bodyHeight = document.body.offsetHeight;
+    const calculatedPadding = this.sizes.articlePadding * 2;
+    const calculatedMargins = this.sizes.titleMarginTop + this.sizes.titleMarginBottom;
+    const calculateChartArea = bodyHeight - calculatedPadding - calculatedMargins - this.sizes.titleHeight;
+    console.log(calculateChartArea);
+    return `${calculateChartArea}px`;
   }
 
   render() {
@@ -44,22 +77,24 @@ class Kowalski extends Component {
         <Styledmain>
           <Aside>
             {this.props.allowSelectChart ? <SelectChartType store={Store} /> : ''}
-            <TitleOptions store={Store} />
             <GridOptions state={Store} />
             <Series store={Store} />
           </Aside>
-          <Article>
-            <h2>{this.props.appName}</h2>
-            <ReactEcharts
-              notMerge={true}
-              option={Store.getOptions()}
-              echarts={echarts}
-              onEvents={onEvents}
-              style={{ height: '500px' }}
-            />
+          <Article style={{ padding: `${this.sizes.articlePadding}px 0` }}>
+            <ChartBox>
+              <ReactEcharts
+                notMerge={true}
+                option={Store.getOptions()}
+                echarts={echarts}
+                onEvents={onEvents}
+                style={{ height: this._calcChartHeight() }}
+              />
+            </ChartBox>
             <pre style={{ display: 'none' }}>{JSON.stringify(Store.getOptions(), null, 2)}</pre>
+            <pre style={{ display: 'none' }}>{JSON.stringify(Store.resize, null, 2)}</pre>
           </Article>
           <Aside>
+            <TitleOptions store={Store} />
             <LegendOptions store={Store} />
           </Aside>
         </Styledmain>

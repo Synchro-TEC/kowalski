@@ -1,5 +1,6 @@
 export default {
   right: 20,
+  top: 20,
   feature: {
     restore: {
       show: true,
