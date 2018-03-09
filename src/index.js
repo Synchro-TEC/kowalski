@@ -25,9 +25,17 @@ const Maincontainer = styled.div`
 `;
 
 const ChartBox = styled.div`
-  border: 1px solid #ccc;
+  border: 1px solid #dcdcdc;
   box-shadow: 0px 4px 8px -3px rgba(17, 17, 17, 0.1);
   background: #fff;
+  margin-bottom: 13px;
+`;
+
+const ButtonsBox = styled.div`
+  border: 1px solid #dcdcdc;
+  box-shadow: 0px 4px 8px -3px rgba(17, 17, 17, 0.1);
+  background: #fff;
+  height: 40px;
 `;
 
 class Kowalski extends Component {
@@ -35,10 +43,10 @@ class Kowalski extends Component {
     super(props);
 
     this.sizes = {
-      articlePadding: 10,
-      titleMarginTop: 3.5,
-      titleMarginBottom: 20,
-      titleHeight: 30,
+      articlePaddingTop: 10,
+      articlePaddingBottom: 13,
+      articleMarginBottom: 13,
+      buttonHeight: 40,
     };
 
     this._fireResize = this._fireResize.bind(this);
@@ -59,10 +67,10 @@ class Kowalski extends Component {
 
   _calcChartHeight() {
     const bodyHeight = document.body.offsetHeight;
-    const calculatedPadding = this.sizes.articlePadding * 2;
-    const calculatedMargins = this.sizes.titleMarginTop + this.sizes.titleMarginBottom;
-    const calculateChartArea = bodyHeight - calculatedPadding - calculatedMargins - this.sizes.titleHeight;
-    console.log(calculateChartArea);
+    const calculatedPadding = this.sizes.articlePaddingTop + this.sizes.articlePaddingBottom;
+    const calculatedMargins = this.sizes.articleMarginBottom;
+    const calculateChartArea = bodyHeight - calculatedPadding - calculatedMargins - this.sizes.buttonHeight;
+
     return `${calculateChartArea}px`;
   }
 
@@ -77,27 +85,28 @@ class Kowalski extends Component {
         <Styledmain>
           <Aside>
             {this.props.allowSelectChart ? <SelectChartType store={Store} /> : ''}
-            <GridOptions state={Store} />
-            <Series store={Store} />
+            {/*<GridOptions state={Store} />
+    <Series store={Store} />*/}
           </Aside>
-          <Article style={{ padding: `${this.sizes.articlePadding}px 0` }}>
+          <Article style={{ padding: `${this.sizes.articlePaddingTop}px 0 ${this.sizes.articlePaddingBottom}px 0` }}>
             <ChartBox>
               <ReactEcharts
                 notMerge={true}
-                option={Store.getOptions()}
+                option={Store.chart}
                 echarts={echarts}
                 onEvents={onEvents}
                 style={{ height: this._calcChartHeight() }}
               />
             </ChartBox>
-            <pre style={{ display: 'none' }}>{JSON.stringify(Store.getOptions(), null, 2)}</pre>
-            <pre style={{ display: 'none' }}>{JSON.stringify(Store.resize, null, 2)}</pre>
+            <ButtonsBox>Buttons</ButtonsBox>
           </Article>
           <Aside>
             <TitleOptions store={Store} />
             <LegendOptions store={Store} />
           </Aside>
         </Styledmain>
+        <pre style={{ display: 'none' }}>{JSON.stringify(Store.chart, null, 2)}</pre>
+        <pre style={{ display: 'none' }}>{JSON.stringify(Store.chart.dataset, null, 2)}</pre>
       </Maincontainer>
     );
   }
