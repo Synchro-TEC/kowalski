@@ -1,8 +1,8 @@
 export default {
-  show: false,
-  left: '3%',
-  right: '4%',
-  bottom: '3%',
+  top: 100,
+  right: 50,
+  bottom: 100,
+  left: 50,
   containLabel: true,
-  backgroundColor: 'rgba(230, 20, 230, .31)',
+  backgroundColor: 'rgba(200, 200, 200, .31)',
 };

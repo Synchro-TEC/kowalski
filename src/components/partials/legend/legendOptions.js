@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { view } from 'react-easy-state';
-import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import Values from '../../../echarts-props/options/values';
 import ElementPadding from '../../ui/elementPadding';

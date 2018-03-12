@@ -10,9 +10,11 @@ import echarts from 'echarts';
 import SelectChartType from './components/partials/chartType/selectChartType';
 import TitleOptions from './components/partials/title/titleOptions';
 import LegendOptions from './components/partials/legend/legendOptions';
-import GridOptions from './components/partials/grid/gridOptions';
+import ChartAreaOptions from './components/partials/chartArea/chartAreaOptions';
 import Store from './store/mainStore';
 import Series from './components/partials/series/series';
+import AxisX from './components/partials/axisX/axisX';
+import AxisY from './components/partials/axisY/axisY';
 
 const Maincontainer = styled.div`
   height: 100%;
@@ -85,8 +87,14 @@ class Kowalski extends Component {
         <Styledmain>
           <Aside>
             {this.props.allowSelectChart ? <SelectChartType store={Store} /> : ''}
-            {/*<GridOptions state={Store} />
-    <Series store={Store} />*/}
+            {Store.selectedPlot ? (
+              <React.Fragment>
+                <AxisX store={Store} /> <AxisY store={Store} />
+              </React.Fragment>
+            ) : (
+              ''
+            )}
+            {Object.keys(Store.chart).includes('series') && Store.chart.series.length ? <Series store={Store} /> : ''}
           </Aside>
           <Article style={{ padding: `${this.sizes.articlePaddingTop}px 0 ${this.sizes.articlePaddingBottom}px 0` }}>
             <ChartBox>
@@ -103,6 +111,7 @@ class Kowalski extends Component {
           <Aside>
             <TitleOptions store={Store} />
             <LegendOptions store={Store} />
+            <ChartAreaOptions store={Store} />
           </Aside>
         </Styledmain>
         <pre style={{ display: 'none' }}>{JSON.stringify(Store.chart, null, 2)}</pre>

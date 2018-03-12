@@ -1,7 +1,6 @@
 export default {
   type: 'plain',
   show: true,
-  data: [],
   zlevel: 0,
   z: 2,
   left: 'center',

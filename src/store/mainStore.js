@@ -70,21 +70,31 @@ import _set from 'lodash/set';
 let Store = store({
   resize: false,
   plots: [
-    { id: 'line', title: 'Linha', icon: 'line.png' },
-    { id: 'bar', title: 'Barras', icon: 'bar.png' },
-    { id: 'pie', title: 'Pizza', icon: 'pizza.png' },
+    { id: 'line', type: 'line', title: 'Linha', icon: 'line.png' },
+    { id: 'area', type: 'line', title: 'Área', icon: 'area.png' },
+    { id: 'bar', type: 'bar', title: 'Barras', icon: 'bar.png' },
+    { id: 'pie', type: 'pie', title: 'Pizza', icon: 'pizza.png' },
+    { id: 'stacked', type: 'bar', title: 'Barras Empilhadas', icon: 'stacked.png' },
   ],
   columns: [],
   series: null,
   chart: {
     title: titleProps,
-    grid: gridProps,
+    grid: [gridProps],
     toolbox: toolboxProps,
     legend: legendProps,
     dataset: {
       dimensions: [],
       source: [],
     },
+  },
+  selectedPlot: null,
+  axisXSeted: false,
+  updateGridOptions: gridValues => {
+    Store.chart.grid[0].top = gridValues.top;
+    Store.chart.grid[0].right = gridValues.right;
+    Store.chart.grid[0].bottom = gridValues.bottom;
+    Store.chart.grid[0].left = gridValues.left;
   },
   onResize: _ => {
     Store.resize = !Store.resize;
@@ -94,48 +104,61 @@ let Store = store({
   },
   setData: data => {
     if (data) {
-      Store.chart.dataset.dimensions = Object.keys(data[0]);
+      Store.columns = Object.keys(data[0]);
+      Store.chart.dataset.dimensions = [];
       Store.chart.dataset.source = data;
-      Store.chart.xAxis = { type: 'category' };
-      Store.chart.yAxis = {};
-      Store.chart.series = [{ type: 'line' }, { type: 'line' }, { type: 'line' }];
+      Store.chart.xAxis = {
+        type: 'category',
+        show: false,
+        axisLabel: {
+          interval: 0,
+          rotate: 75,
+        },
+      };
+      Store.chart.yAxis = { type: 'value', show: false };
+      Store.chart.series = [];
     }
   },
-  selectedPlot: null,
   setPlot: plot => {
     Store.selectedPlot = plot;
   },
-  getOptions: _ => {
-    return {
-      // title: Store.chart.title,
-      // grid: Store.chart.grid,
-      // legend: Store.chart.legend,
-      // toolbox: Store.chart.toolbox,
-      // tooltip: {
-      //   trigger: 'item',
-      //   formatter: '{a} <br/>{b} : {c} ({d}%)',
-      // },
-      // series: [
-      //   {
-      //     name: 'Obrigação',
-      //     radius: ['30%', '50%'],
-      //     center: ['50%', '50%'],
-      //     itemStyle: {
-      //       emphasis: {
-      //         shadowColor: 'rgba(0, 0, 0, 0.15)',
-      //         shadowBlur: 12,
-      //         shadowOffsetX: 0,
-      //         opacity: 1,
-      //       },
-      //       opacity: 0.9,
-      //       // borderWidth: 2,
-      //       // borderColor: '#fff',
-      //     },
-      //     data: seriesData,
-      //     type: 'pie',
-      //   },
-      // ],
+  setAxisX: value => {
+    if (value) {
+      if (Store.axisXSeted) {
+        Store.chart.dataset.dimensions.shift();
+      }
+      Store.chart.dataset.dimensions.unshift(value);
+      Store.axisXSeted = true;
+      Store.chart.xAxis.show = true;
+    } else {
+      Store.chart.dataset.dimensions.shift();
+      Store.axisXSeted = false;
+      Store.chart.xAxis.show = false;
+    }
+  },
+  addSerie: value => {
+    Store.chart.dataset.dimensions.push(value);
+    let serie = {
+      name: value,
+      type: Store.selectedPlot.type,
     };
+
+    if (Store.selectedPlot.id === 'stacked') {
+      serie.stack = 'stack';
+    }
+
+    if (Store.selectedPlot.id === 'area') {
+      serie.areaStyle = {};
+    }
+
+    Store.chart.series.push(serie);
+  },
+  removeSerie: index => {
+    Store.chart.series.splice(index, 1);
+    Store.removeDimension(index + 1);
+  },
+  removeDimension: index => {
+    Store.chart.dataset.dimensions.splice(index, 1);
   },
 });
 

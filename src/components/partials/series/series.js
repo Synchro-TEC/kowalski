@@ -1,21 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { view } from 'react-easy-state';
+import Area from '../../ui/area';
+import AreaTitle from '../../ui/areaTitle';
 
 const Series = props => {
-  const cols = props.store.columns.map((col, i) => (
-    <option value={col} key={`col-${i}`}>
-      {col}
-    </option>
-  ));
-
   return (
-    <div>
-      <select>{cols}</select>
-    </div>
+    <Area>
+      <AreaTitle>Series</AreaTitle>
+      <div className="sv-form sv-pa--15 sv-bg-color--white-1">
+        <u className="sv-ol">
+          {props.store.chart.series.map((serie, i) => (
+            <li key={`serie-${i}`}>
+              <a onClick={() => props.store.removeSerie(i)}>[&times;]</a> {'  '}
+              {serie.name}
+            </li>
+          ))}
+        </u>
+      </div>
+    </Area>
   );
 };
 
 Series.propTypes = {
   store: PropTypes.object,
 };
-export default Series;
+export default view(Series);
