@@ -76,6 +76,7 @@ let Store = store({
     { id: 'pie', type: 'pie', title: 'Pizza', icon: 'pizza.png' },
     { id: 'stacked', type: 'bar', title: 'Barras Empilhadas', icon: 'stacked.png' },
   ],
+  data: [],
   columns: [],
   series: null,
   chart: {
@@ -113,30 +114,31 @@ let Store = store({
   },
   setData: data => {
     if (data) {
+      Store.data = data;
       Store.columns = Object.keys(data[0]);
-      Store.chart.dataset.dimensions = [];
-      Store.chart.dataset.source = data;
-      Store.chart.xAxis = {
-        type: 'category',
-        show: false,
-        boundaryGap: false,
-        axisLabel: {
-          interval: 0,
-          rotate: 75,
-          formatter: (value, index) => {
-            let val = value;
-            if (typeof val === 'string' || val instanceof String) {
-              val = val.substring(0, 20);
-            }
-            return val;
-          },
-        },
-        axisLine: {
-          show: true,
-        },
-      };
-      Store.chart.yAxis = { type: 'value', show: true };
-      Store.chart.series = [];
+      // Store.chart.dataset.dimensions = [];
+      // Store.chart.dataset.source = data;
+      // Store.chart.xAxis = {
+      //   type: 'category',
+      //   show: false,
+      //   boundaryGap: false,
+      //   axisLabel: {
+      //     interval: 0,
+      //     rotate: 75,
+      //     formatter: (value, index) => {
+      //       let val = value;
+      //       if (typeof val === 'string' || val instanceof String) {
+      //         val = val.substring(0, 20);
+      //       }
+      //       return val;
+      //     },
+      //   },
+      //   axisLine: {
+      //     show: true,
+      //   },
+      // };
+      // Store.chart.yAxis = { type: 'value', show: true };
+      // Store.chart.series = [];
     }
   },
   setPlot: plot => {

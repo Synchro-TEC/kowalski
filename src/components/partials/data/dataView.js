@@ -1,20 +1,57 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { view } from 'react-easy-state';
 import HotTable from 'react-handsontable';
 import Area from '../../ui/area';
 import AreaTitle from '../../ui/areaTitle';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
-const DataView = props => {
-  return (
-    <div style={{ height: '300px' }}>
-      <Area>
-        <AreaTitle>Data</AreaTitle>
-        <HotTable root="hot" data={props.store.data} colHeaders={true} rowHeaders={true} height="300" stretchH="all" />
+class DataView extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    const props = this.props;
+    return (
+      <Area style={{ height: '275px' }}>
+        <AreaTitle>Dados</AreaTitle>
+        <Tabs>
+          <TabList>
+            <Tab>Dados Brutos</Tab>
+            <Tab>Dados Preparados</Tab>
+          </TabList>
+
+          <TabPanel>
+            <div className="sv-pa--10 sv-bg-color--white-1">
+              <HotTable
+                root="hot"
+                ref={rawHot => {
+                  this.rawHot = rawHot;
+                }}
+                data={props.store.data}
+                disableVisualSelection={['current', 'area', 'header']}
+                columnSorting={true}
+                sortIndicator={true}
+                colHeaders={props.store.columns}
+                columns={props.store.columns.map(c => {
+                  return { data: c, readOnly: true };
+                })}
+                rowHeaders={false}
+                height="188"
+                stretchH="all"
+                stretchW="all"
+              />
+            </div>
+          </TabPanel>
+          <TabPanel className="sv-bg-color--white-1">
+            <div className="sv-pa--10 sv-bg-color--white-1">Realize o mapeamento</div>
+          </TabPanel>
+        </Tabs>
       </Area>
-    </div>
-  );
-};
+    );
+  }
+}
 
 DataView.propTypes = {
   store: PropTypes.object,

@@ -15,7 +15,7 @@ import Store from './store/mainStore';
 import Series from './components/partials/series/series';
 import AxisX from './components/partials/axisX/axisX';
 import AxisY from './components/partials/axisY/axisY';
-import DataPreview from './components/partials/data/dataView';
+import DataView from './components/partials/data/dataView';
 
 const Maincontainer = styled.div`
   height: 100%;
@@ -50,7 +50,7 @@ class Kowalski extends Component {
       articlePaddingBottom: 13,
       articleMarginBottom: 13,
       buttonHeight: 40,
-      dataView: 300,
+      dataView: 288,
     };
 
     this._fireResize = this._fireResize.bind(this);
@@ -90,7 +90,7 @@ class Kowalski extends Component {
         <Styledmain>
           <Aside>
             {this.props.allowSelectChart ? <SelectChartType store={Store} /> : ''}
-            {Store.selectedPlot ? (
+            {Store.selectedPlot && Object.keys(Store.chart).includes('series') ? (
               <React.Fragment>
                 <AxisX store={Store} /> <AxisY store={Store} />
               </React.Fragment>
@@ -100,6 +100,7 @@ class Kowalski extends Component {
             {Object.keys(Store.chart).includes('series') && Store.chart.series.length ? <Series store={Store} /> : ''}
           </Aside>
           <Article style={{ padding: `${this.sizes.articlePaddingTop}px 0 ${this.sizes.articlePaddingBottom}px 0` }}>
+            <DataView store={Store} />
             <ChartBox>
               <ReactEcharts
                 notMerge={true}
@@ -118,7 +119,8 @@ class Kowalski extends Component {
           </Aside>
         </Styledmain>
         <pre style={{ display: 'none' }}>{JSON.stringify(Store.chart, null, 2)}</pre>
-        <pre style={{ display: 'none' }}>{JSON.stringify(Store.chart.dataset, null, 2)}</pre>
+        <pre style={{ display: 'none' }}>{JSON.stringify(Store.data, null, 2)}</pre>
+        <pre style={{ display: 'none' }}>{JSON.stringify(Store.columns, null, 2)}</pre>
       </Maincontainer>
     );
   }
