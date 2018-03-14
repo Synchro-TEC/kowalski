@@ -58,7 +58,7 @@ import _set from 'lodash/set';
 //   { bla: 'Dom-3', vv: 130, color: '' },
 // ];
 
-// // const legendData = data.map(d => d['bla']);
+// const legendData = data.map(d => d['bla']);
 // const seriesData = data.map(d => {
 //   return { name: d['bla'], value: d['vv'], itemStyle: { color: d['color'] } };
 // });
@@ -80,6 +80,15 @@ let Store = store({
   series: null,
   chart: {
     title: titleProps,
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'shadow',
+        label: {
+          show: true,
+        },
+      },
+    },
     grid: [gridProps],
     toolbox: toolboxProps,
     legend: legendProps,
@@ -110,12 +119,23 @@ let Store = store({
       Store.chart.xAxis = {
         type: 'category',
         show: false,
+        boundaryGap: false,
         axisLabel: {
           interval: 0,
           rotate: 75,
+          formatter: (value, index) => {
+            let val = value;
+            if (typeof val === 'string' || val instanceof String) {
+              val = val.substring(0, 20);
+            }
+            return val;
+          },
+        },
+        axisLine: {
+          show: true,
         },
       };
-      Store.chart.yAxis = { type: 'value', show: false };
+      Store.chart.yAxis = { type: 'value', show: true };
       Store.chart.series = [];
     }
   },
@@ -129,11 +149,9 @@ let Store = store({
       }
       Store.chart.dataset.dimensions.unshift(value);
       Store.axisXSeted = true;
-      Store.chart.xAxis.show = true;
     } else {
       Store.chart.dataset.dimensions.shift();
       Store.axisXSeted = false;
-      Store.chart.xAxis.show = false;
     }
   },
   addSerie: value => {
@@ -148,7 +166,8 @@ let Store = store({
     }
 
     if (Store.selectedPlot.id === 'area') {
-      serie.areaStyle = {};
+      serie.areaStyle = { normal: {} };
+      serie.stack = 'stack';
     }
 
     Store.chart.series.push(serie);

@@ -15,6 +15,7 @@ import Store from './store/mainStore';
 import Series from './components/partials/series/series';
 import AxisX from './components/partials/axisX/axisX';
 import AxisY from './components/partials/axisY/axisY';
+import DataPreview from './components/partials/data/dataView';
 
 const Maincontainer = styled.div`
   height: 100%;
@@ -49,6 +50,7 @@ class Kowalski extends Component {
       articlePaddingBottom: 13,
       articleMarginBottom: 13,
       buttonHeight: 40,
+      dataView: 300,
     };
 
     this._fireResize = this._fireResize.bind(this);
@@ -71,7 +73,8 @@ class Kowalski extends Component {
     const bodyHeight = document.body.offsetHeight;
     const calculatedPadding = this.sizes.articlePaddingTop + this.sizes.articlePaddingBottom;
     const calculatedMargins = this.sizes.articleMarginBottom;
-    const calculateChartArea = bodyHeight - calculatedPadding - calculatedMargins - this.sizes.buttonHeight;
+    const calculateChartArea =
+      bodyHeight - calculatedPadding - calculatedMargins - this.sizes.buttonHeight - this.sizes.dataView;
 
     return `${calculateChartArea}px`;
   }
