@@ -18,8 +18,7 @@ class DataView extends Component {
         <AreaTitle>Dados</AreaTitle>
         <Tabs>
           <TabList>
-            <Tab>Dados Brutos</Tab>
-            <Tab>Dados Preparados</Tab>
+            <Tab>Dados</Tab>
           </TabList>
 
           <TabPanel>
@@ -29,23 +28,20 @@ class DataView extends Component {
                 ref={rawHot => {
                   this.rawHot = rawHot;
                 }}
-                data={props.store.data}
+                data={props.store.chart.dataset.source}
                 disableVisualSelection={['current', 'area', 'header']}
                 columnSorting={true}
                 sortIndicator={true}
-                colHeaders={props.store.columns}
-                columns={props.store.columns.map(c => {
-                  return { data: c, readOnly: true };
-                })}
+                // colHeaders={props.store.columns}
+                // columns={props.store.columns.map(c => {
+                //   return { data: c, readOnly: true };
+                // })}
                 rowHeaders={false}
                 height="188"
                 stretchH="all"
                 stretchW="all"
               />
             </div>
-          </TabPanel>
-          <TabPanel className="sv-bg-color--white-1">
-            <div className="sv-pa--10 sv-bg-color--white-1">Realize o mapeamento</div>
           </TabPanel>
         </Tabs>
       </Area>
@@ -58,3 +54,29 @@ DataView.propTypes = {
 };
 
 export default view(DataView);
+
+/*
+
+ {props.store.data.length ? (
+                <HotTable
+                  root="hot"
+                  ref={rawHot => {
+                    this.rawHot = rawHot;
+                  }}
+                  data={props.store.data}
+                  disableVisualSelection={['current', 'area', 'header']}
+                  columnSorting={true}
+                  sortIndicator={true}
+                  colHeaders={props.store.columns.map(c => c.columnLabel)}
+                  columns={props.store.columns.map(c => {
+                    return { data: c.columnName, readOnly: true };
+                  })}
+                  rowHeaders={false}
+                  height="188"
+                  stretchH="all"
+                  stretchW="all"
+                />
+              ) : (
+                ''
+              )}
+* */

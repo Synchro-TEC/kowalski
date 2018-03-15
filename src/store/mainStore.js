@@ -4,68 +4,9 @@ import gridProps from '../echarts-props/grid';
 import toolboxProps from '../echarts-props/toolbox';
 import legendProps from '../echarts-props/legend';
 import _set from 'lodash/set';
+import alasql from 'alasql';
 
-// const prepareData = data => {
-//   let vals = {};
-//   let mapped = false;
-//   for (let i = 0; i < data.length; i++) {
-//     if (!mapped) {
-//       Object.keys(data[i]).map(key => (vals[key] = []));
-//       mapped = true;
-//     }
-
-//     for (let val in data[i]) {
-//       if (
-//         data[i].hasOwnProperty(val) &&
-//         !Array.isArray(val) &&
-//         Object.prototype.toString.call(val) !== '[object Object]'
-//       ) {
-//         vals[val].push(data[i][val]);
-//       }
-//     }
-//   }
-//   return vals;
-// };
-
-// let data = [
-//   { bla: 'Seg', vv: 720, color: 'rgba(230, 207, 58, 1)' },
-//   { bla: 'Ter', vv: 620, color: 'rgba(59, 97, 158, 1)' },
-//   { bla: 'Qua', vv: 520, color: 'rgba(200, 88, 58, 1)' },
-//   { bla: 'Qui', vv: 420, color: 'rgba(190, 227, 158, 1)' },
-//   { bla: 'Sex', vv: 320, color: 'rgba(200, 107, 158, 1)' },
-//   { bla: 'Sab', vv: 220, color: 'rgba(230, 27, 58, 1)' },
-//   { bla: 'Dom', vv: 120, color: 'rgba(130, 127, 58, 1)' },
-//   { bla: 'Seg-1', vv: 780, color: '' },
-//   { bla: 'Ter-1', vv: 680, color: '' },
-//   { bla: 'Qua-1', vv: 580, color: '' },
-//   { bla: 'Qui-1', vv: 480, color: '' },
-//   { bla: 'Sex-1', vv: 380, color: '' },
-//   { bla: 'Sab-1', vv: 280, color: '' },
-//   { bla: 'Dom-1', vv: 180, color: '' },
-//   { bla: 'Seg-2', vv: 750, color: '' },
-//   { bla: 'Ter-2', vv: 650, color: '' },
-//   { bla: 'Qua-2', vv: 550, color: '' },
-//   { bla: 'Qui-2', vv: 450, color: '' },
-//   { bla: 'Sex-2', vv: 350, color: '' },
-//   { bla: 'Sab-2', vv: 250, color: '' },
-//   { bla: 'Dom-2', vv: 120, color: '' },
-//   { bla: 'Seg-3', vv: 730, color: '' },
-//   { bla: 'Ter-3', vv: 630, color: '' },
-//   { bla: 'Qua-3', vv: 530, color: '' },
-//   { bla: 'Qui-3', vv: 430, color: '' },
-//   { bla: 'Sex-3', vv: 330, color: '' },
-//   { bla: 'Sab-3', vv: 230, color: '' },
-//   { bla: 'Dom-3', vv: 130, color: '' },
-// ];
-
-// const legendData = data.map(d => d['bla']);
-// const seriesData = data.map(d => {
-//   return { name: d['bla'], value: d['vv'], itemStyle: { color: d['color'] } };
-// });
-
-// let originalData;
-// let series;
-// legendProps.data = data.map(d => d['bla']);
+let RAW_DATA = [];
 
 let Store = store({
   resize: false,
@@ -78,6 +19,10 @@ let Store = store({
   ],
   data: [],
   columns: [],
+  projectedCols: {
+    grouped: [],
+    aggregated: [],
+  },
   series: null,
   chart: {
     title: titleProps,
@@ -100,6 +45,7 @@ let Store = store({
   },
   selectedPlot: null,
   axisXSeted: false,
+  dataReceived: false,
   updateGridOptions: gridValues => {
     Store.chart.grid[0].top = gridValues.top;
     Store.chart.grid[0].right = gridValues.right;
@@ -113,9 +59,10 @@ let Store = store({
     _set(Store, key, val);
   },
   setData: data => {
-    if (data) {
-      Store.data = data;
-      Store.columns = Object.keys(data[0]);
+    if (data.length) {
+      RAW_DATA = data;
+      Store.dataReceived = true;
+      // Store.columns = Object.keys(data[0]);
       // Store.chart.dataset.dimensions = [];
       // Store.chart.dataset.source = data;
       // Store.chart.xAxis = {
@@ -141,8 +88,36 @@ let Store = store({
       // Store.chart.series = [];
     }
   },
+  setColumns: schema => {
+    Store.columns = schema;
+  },
   setPlot: plot => {
     Store.selectedPlot = plot;
+  },
+  setProjection: col => {
+    //['varchar', 'numeric', 'timestamp']
+    if (col.columnType === 'varchar') {
+      Store.projectedCols.grouped.push({ col: col.columnName, as: col.columnLabel });
+    }
+
+    if (col.columnType === 'numeric') {
+      Store.projectedCols.aggregated.push({ col: col.columnName, as: col.columnLabel, fn: 'SUM' });
+    }
+
+    Store.projectQuery();
+  },
+  projectQuery: _ => {
+    const gSelect = Store.projectedCols.grouped.map(gCol => `[${gCol.col}]`).join(',');
+    const gGroup = Store.projectedCols.grouped.map(gCol => `[${gCol.col}]`).join(',');
+    const aGg = Store.projectedCols.aggregated.map(aCol => `${aCol.fn}([${aCol.col}]) as ${aCol.col}`).join(',');
+
+    const selectQuery = aGg.length ? `${gSelect}, ${aGg}` : gSelect;
+    const queryString = `SELECT ${selectQuery} FROM ? GROUP BY ${gGroup}`;
+    debugger;
+    console.time('GROUP');
+    let result = alasql(queryString, [RAW_DATA]);
+    console.timeEnd('GROUP');
+    debugger;
   },
   setAxisX: value => {
     if (value) {

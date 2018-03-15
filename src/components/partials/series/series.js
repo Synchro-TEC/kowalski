@@ -9,14 +9,14 @@ const Series = props => {
     <Area>
       <AreaTitle>Series</AreaTitle>
       <div className="sv-form sv-pa--15 sv-bg-color--white-1">
-        <u className="sv-ol">
+        <ul className="sv-ol">
           {props.store.chart.series.map((serie, i) => (
             <li key={`serie-${i}`}>
               <a onClick={() => props.store.removeSerie(i)}>[&times;]</a> {'  '}
               {serie.name}
             </li>
           ))}
-        </u>
+        </ul>
       </div>
     </Area>
   );

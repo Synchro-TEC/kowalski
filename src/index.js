@@ -16,6 +16,7 @@ import Series from './components/partials/series/series';
 import AxisX from './components/partials/axisX/axisX';
 import AxisY from './components/partials/axisY/axisY';
 import DataView from './components/partials/data/dataView';
+import ColumnSelector from './components/partials/columnSelector/columnSelector';
 
 const Maincontainer = styled.div`
   height: 100%;
@@ -50,7 +51,7 @@ class Kowalski extends Component {
       articlePaddingBottom: 13,
       articleMarginBottom: 13,
       buttonHeight: 40,
-      dataView: 288,
+      dataView: 308,
     };
 
     this._fireResize = this._fireResize.bind(this);
@@ -62,7 +63,12 @@ class Kowalski extends Component {
 
   componentDidMount() {
     Store.setData(this.props.data);
+    Store.setColumns(this.props.schema);
     window.addEventListener('resize', this._fireResize);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    Store.setData(nextProps.data);
   }
 
   componentWillUnmount() {
@@ -89,7 +95,7 @@ class Kowalski extends Component {
       <Maincontainer>
         <Styledmain>
           <Aside>
-            {this.props.allowSelectChart ? <SelectChartType store={Store} /> : ''}
+            {/*{this.props.allowSelectChart ? <SelectChartType store={Store} /> : ''}*/}
             {Store.selectedPlot && Object.keys(Store.chart).includes('series') ? (
               <React.Fragment>
                 <AxisX store={Store} /> <AxisY store={Store} />
@@ -98,6 +104,7 @@ class Kowalski extends Component {
               ''
             )}
             {Object.keys(Store.chart).includes('series') && Store.chart.series.length ? <Series store={Store} /> : ''}
+            {Store.dataReceived ? <ColumnSelector store={Store} /> : ''}
           </Aside>
           <Article style={{ padding: `${this.sizes.articlePaddingTop}px 0 ${this.sizes.articlePaddingBottom}px 0` }}>
             <DataView store={Store} />
@@ -131,6 +138,13 @@ Kowalski.propTypes = {
   appName: PropTypes.string.isRequired,
   allowSelectChart: PropTypes.bool,
   allowSelectData: PropTypes.bool,
+  schema: PropTypes.arrayOf(
+    PropTypes.shape({
+      columnName: PropTypes.string,
+      columnLabel: PropTypes.string,
+      columnType: PropTypes.oneOf(['varchar', 'numeric', 'timestamp']),
+    })
+  ),
 };
 
 export default view(Kowalski);
