@@ -3,10 +3,8 @@ import titleProps from '../echarts-props/title';
 import gridProps from '../echarts-props/grid';
 import toolboxProps from '../echarts-props/toolbox';
 import legendProps from '../echarts-props/legend';
+import Database from '../database/data';
 import _set from 'lodash/set';
-import alasql from 'alasql';
-
-let RAW_DATA = [];
 
 let Store = store({
   resize: false,
@@ -17,8 +15,8 @@ let Store = store({
     { id: 'pie', type: 'pie', title: 'Pizza', icon: 'pizza.png' },
     { id: 'stacked', type: 'bar', title: 'Barras Empilhadas', icon: 'stacked.png' },
   ],
-  data: [],
   columns: [],
+  lastExecutedQuery: null,
   projectedCols: {
     grouped: [],
     aggregated: [],
@@ -39,9 +37,9 @@ let Store = store({
     toolbox: toolboxProps,
     legend: legendProps,
     dataset: {
-      dimensions: [],
       source: [],
     },
+    series: [],
   },
   selectedPlot: null,
   axisXSeted: false,
@@ -60,7 +58,7 @@ let Store = store({
   },
   setData: data => {
     if (data.length) {
-      RAW_DATA = data;
+      Database.data = data;
       Store.dataReceived = true;
       // Store.columns = Object.keys(data[0]);
       // Store.chart.dataset.dimensions = [];
@@ -97,27 +95,65 @@ let Store = store({
   setProjection: col => {
     //['varchar', 'numeric', 'timestamp']
     if (col.columnType === 'varchar') {
-      Store.projectedCols.grouped.push({ col: col.columnName, as: col.columnLabel });
+      const alreadyIndexed = Store.projectedCols.grouped.findIndex(gCol => gCol.col === col.columnName);
+
+      if (alreadyIndexed >= 0) {
+        Store.projectedCols.grouped.splice(alreadyIndexed, 1);
+      } else {
+        Store.projectedCols.grouped.push({ col: col.columnName, as: col.columnLabel });
+      }
     }
 
     if (col.columnType === 'numeric') {
-      Store.projectedCols.aggregated.push({ col: col.columnName, as: col.columnLabel, fn: 'SUM' });
+      const alreadyIndexed = Store.projectedCols.aggregated.findIndex(aCol => aCol.col === col.columnName);
+
+      if (alreadyIndexed >= 0) {
+        Store.projectedCols.aggregated.splice(alreadyIndexed, 1);
+      } else {
+        Store.projectedCols.aggregated.push({ col: col.columnName, as: col.columnLabel, fn: 'SUM' });
+      }
     }
 
-    Store.projectQuery();
+    Database.query(Store.projectedCols.grouped, Store.projectedCols.aggregated, Store.queryExecuted);
   },
-  projectQuery: _ => {
-    const gSelect = Store.projectedCols.grouped.map(gCol => `[${gCol.col}]`).join(',');
-    const gGroup = Store.projectedCols.grouped.map(gCol => `[${gCol.col}]`).join(',');
-    const aGg = Store.projectedCols.aggregated.map(aCol => `${aCol.fn}([${aCol.col}]) as ${aCol.col}`).join(',');
-
-    const selectQuery = aGg.length ? `${gSelect}, ${aGg}` : gSelect;
-    const queryString = `SELECT ${selectQuery} FROM ? GROUP BY ${gGroup}`;
+  queryExecuted: _ => {
+    Store.lastExecutedQuery = new Date().getTime();
+    Store.chart.dataset.source = Database.dataset;
     debugger;
-    console.time('GROUP');
-    let result = alasql(queryString, [RAW_DATA]);
-    console.timeEnd('GROUP');
-    debugger;
+    Store.chart.series = [];
+    Database.cols.forEach((col, index) => {
+      if (index > 0) {
+        Store.chart.yAxis = {};
+        Store.chart.xAxis.show = true;
+        Store.chart.xAxis.boundaryGap = true;
+        Store.chart.xAxis.axisLine.show = true;
+        let serie = {
+          name: col,
+          type: 'line',
+        };
+        Store.chart.series.push(serie);
+      } else {
+        Store.chart.xAxis = {
+          type: 'category',
+          show: false,
+          boundaryGap: false,
+          axisLabel: {
+            interval: 0,
+            rotate: 75,
+            formatter: (value, index) => {
+              let val = value;
+              if (typeof val === 'string' || val instanceof String) {
+                val = val.substring(0, 20);
+              }
+              return val;
+            },
+          },
+          axisLine: {
+            show: true,
+          },
+        };
+      }
+    });
   },
   setAxisX: value => {
     if (value) {

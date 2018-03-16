@@ -5,6 +5,7 @@ import HotTable from 'react-handsontable';
 import Area from '../../ui/area';
 import AreaTitle from '../../ui/areaTitle';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import Database from '../../../database/data';
 
 class DataView extends Component {
   constructor(props) {
@@ -13,26 +14,24 @@ class DataView extends Component {
 
   render() {
     const props = this.props;
+    props.store.lastExecutedQuery;
     return (
       <Area style={{ height: '275px' }}>
         <AreaTitle>Dados</AreaTitle>
         <Tabs>
           <TabList>
-            <Tab>Dados</Tab>
+            <Tab>Dados {Database.rows.length ? Database.rows.length : ''}</Tab>
           </TabList>
 
           <TabPanel>
             <div className="sv-pa--10 sv-bg-color--white-1">
               <HotTable
                 root="hot"
-                ref={rawHot => {
-                  this.rawHot = rawHot;
-                }}
-                data={props.store.chart.dataset.source}
+                data={Database.rows}
                 disableVisualSelection={['current', 'area', 'header']}
                 columnSorting={true}
                 sortIndicator={true}
-                // colHeaders={props.store.columns}
+                colHeaders={Database.cols}
                 // columns={props.store.columns.map(c => {
                 //   return { data: c, readOnly: true };
                 // })}
