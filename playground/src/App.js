@@ -6,14 +6,15 @@ import './App.css';
 const schema = [
   { columnName: 'id', columnLabel: 'Id', columnType: 'numeric' },
   { columnName: 'responsavel', columnLabel: 'Responsável', columnType: 'varchar' },
+  { columnName: 'supervisor', columnLabel: 'Supervisor', columnType: 'varchar' },
   { columnName: 'estado', columnLabel: 'UF', columnType: 'varchar' },
   { columnName: 'status', columnLabel: 'Status', columnType: 'varchar' },
   { columnName: 'estabelecimento', columnLabel: 'Estabelecimento', columnType: 'varchar' },
   { columnName: 'obrigacao', columnLabel: 'Ogrigação', columnType: 'varchar' },
-  { columnName: 'valor_apurado', columnLabel: 'Valor Apurado', columnType: 'numeric' },
-  { columnName: 'valor_pago', columnLabel: 'Valor Pago', columnType: 'numeric' },
-  { columnName: 'data_inclusao', columnLabel: 'Dt. Inclusão', columnType: 'timestamp' },
-  { columnName: 'data_vencimento', columnLabel: 'Dt. Vencimento', columnType: 'timestamp' },
+  { columnName: 'valorApurado', columnLabel: 'Valor Apurado', columnType: 'numeric' },
+  { columnName: 'valorPago', columnLabel: 'Valor Pago', columnType: 'numeric' },
+  { columnName: 'dataPagamento', columnLabel: 'Dt. Pagamento', columnType: 'timestamp' },
+  { columnName: 'dataVencimento', columnLabel: 'Dt. Vencimento', columnType: 'timestamp' },
 ];
 
 class App extends Component {
@@ -25,12 +26,11 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.time('lOAD-100000-REGISTROS');
-    axios.get('http://localhost:3001/data').then(response => {
-      console.timeEnd('lOAD-100000-REGISTROS');
-
-      console.time('SETSTATE-100000-REGISTROS');
-      this.setState({ data: response.data }, () => console.timeEnd('SETSTATE-100000-REGISTROS'));
+    console.time('lOAD-TIME');
+    axios.get('http://localhost:8080/stats/data?records=1M').then(response => {
+      console.timeEnd('lOAD-TIME');
+      console.time('SETSTATE-TIME');
+      this.setState({ data: response.data.data }, () => console.timeEnd('SETSTATE-TIME'));
     });
   }
 
