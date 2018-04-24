@@ -40,6 +40,7 @@ const ButtonsBox = styled.div`
   box-shadow: 0px 4px 8px -3px rgba(17, 17, 17, 0.1);
   background: #fff;
   height: 40px;
+  padding: 5px;
 `;
 
 class Kowalski extends Component {
@@ -62,8 +63,9 @@ class Kowalski extends Component {
   }
 
   componentDidMount() {
-    Store.setData(this.props.data);
-    Store.setColumns(this.props.schema);
+    // Store.setData(this.props.data);
+    // Store.setColumns(this.props.schema);
+    Store.initialize(this.props.chart);
     window.addEventListener('resize', this._fireResize);
   }
 
@@ -76,11 +78,12 @@ class Kowalski extends Component {
   }
 
   _calcChartHeight() {
+    const dataViewHeight = this.props.showDataView ? this.sizes.dataView : 0;
     const bodyHeight = document.body.offsetHeight;
     const calculatedPadding = this.sizes.articlePaddingTop + this.sizes.articlePaddingBottom;
     const calculatedMargins = this.sizes.articleMarginBottom;
     const calculateChartArea =
-      bodyHeight - calculatedPadding - calculatedMargins - this.sizes.buttonHeight - this.sizes.dataView;
+      bodyHeight - calculatedPadding - calculatedMargins - this.sizes.buttonHeight - dataViewHeight;
 
     return `${calculateChartArea}px`;
   }
@@ -106,8 +109,12 @@ class Kowalski extends Component {
             {Object.keys(Store.chart).includes('series') && Store.chart.series.length ? <Series store={Store} /> : ''}
             {Store.dataReceived ? <ColumnSelector store={Store} /> : ''}
           </Aside>
-          <Article style={{ padding: `${this.sizes.articlePaddingTop}px 0 ${this.sizes.articlePaddingBottom}px 0` }}>
-            <DataView store={Store} />
+          <Article
+            style={{
+              padding: `${this.sizes.articlePaddingTop}px 0 ${this.sizes.articlePaddingBottom}px 0`,
+            }}
+          >
+            {/*<DataView store={Store} />*/}
             <ChartBox>
               <ReactEcharts
                 notMerge={true}
@@ -117,7 +124,15 @@ class Kowalski extends Component {
                 style={{ height: this._calcChartHeight() }}
               />
             </ChartBox>
-            <ButtonsBox>Buttons</ButtonsBox>
+            <ButtonsBox>
+              <div className="sv-row sv-ma--0 sv-pa--0">
+                <div className="sv-column">
+                  <button type="button" className="sv-button info small ">
+                    FInalizar
+                  </button>
+                </div>
+              </div>
+            </ButtonsBox>
           </Article>
           <Aside>
             <TitleOptions store={Store} />
@@ -133,11 +148,17 @@ class Kowalski extends Component {
   }
 }
 
+Kowalski.defaultProps = {
+  data: [],
+  showDataView: false,
+};
+
 Kowalski.propTypes = {
   data: PropTypes.array,
   appName: PropTypes.string.isRequired,
   allowSelectChart: PropTypes.bool,
   allowSelectData: PropTypes.bool,
+  chart: PropTypes.object,
   schema: PropTypes.arrayOf(
     PropTypes.shape({
       columnName: PropTypes.string,
@@ -145,6 +166,7 @@ Kowalski.propTypes = {
       columnType: PropTypes.oneOf(['varchar', 'numeric', 'timestamp']),
     })
   ),
+  showDataView: PropTypes.bool,
 };
 
 export default view(Kowalski);

@@ -44,6 +44,13 @@ let Store = store({
   selectedPlot: null,
   axisXSeted: false,
   dataReceived: false,
+  initialize: chart => {
+    debugger;
+    Object.keys(chart).forEach(key => {
+      Store.chart[key] = chart[key];
+    });
+    // Store.chart = chart;
+  },
   updateGridOptions: gridValues => {
     Store.chart.grid[0].top = gridValues.top;
     Store.chart.grid[0].right = gridValues.right;

@@ -7,7 +7,7 @@ import AreaTitle from '../../ui/areaTitle';
 const Series = props => {
   return (
     <Area>
-      <AreaTitle>Series</AreaTitle>
+      <AreaTitle>Valores</AreaTitle>
       <div className="sv-form sv-pa--15 sv-bg-color--white-1">
         <ul className="sv-ol">
           {props.store.chart.series.map((serie, i) => (
