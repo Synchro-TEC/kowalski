@@ -100,7 +100,7 @@ Switcher.propTypes = {
   title: PropTypes.string,
   fields: PropTypes.arrayOf(
     PropTypes.shape({
-      label: PropTypes.string,
+      label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
       value: PropTypes.any,
     })
   ),

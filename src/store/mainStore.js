@@ -5,6 +5,7 @@ import toolboxProps from '../echarts-props/toolbox';
 import legendProps from '../echarts-props/legend';
 import Database from '../database/data';
 import _set from 'lodash/set';
+import _get from 'lodash/get';
 
 let Store = store({
   resize: false,
@@ -45,7 +46,7 @@ let Store = store({
   axisXSeted: false,
   dataReceived: false,
   initialize: chart => {
-    debugger;
+    // debugger;
     Object.keys(chart).forEach(key => {
       Store.chart[key] = chart[key];
     });
@@ -198,6 +199,9 @@ let Store = store({
   },
   removeDimension: index => {
     Store.chart.dataset.dimensions.splice(index, 1);
+  },
+  updateSerieProp: (index, prop, value) => {
+    _set(Store.chart.series[index], prop, value);
   },
 });
 
