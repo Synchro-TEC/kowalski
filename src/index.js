@@ -128,7 +128,7 @@ class Kowalski extends Component {
               <div className="sv-row sv-ma--0 sv-pa--0">
                 <div className="sv-column">
                   <button type="button" className="sv-button info small ">
-                    FInalizar
+                    Finalizar
                   </button>
                 </div>
               </div>

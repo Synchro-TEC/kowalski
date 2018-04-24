@@ -63,6 +63,9 @@ class App extends Component {
                 itemStyle: {
                   color: '#ff0011',
                 },
+                areaStyle: {
+                  normal: {},
+                },
                 name: 'Débito',
                 smooth: true,
               },
