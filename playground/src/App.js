@@ -58,7 +58,7 @@ class App extends Component {
             xAxis: {
               type: 'category',
               data: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'],
-              boundaryGap: false,
+              boundaryGap: true,
               axisLine: {
                 show: true,
                 lineStyle: {
@@ -101,6 +101,14 @@ class App extends Component {
                 smooth: false,
                 markPoint: {
                   data: [{ type: 'max', name: 'Máximo' }, { type: 'min', name: 'Mínimo' }],
+                },
+                label: {
+                  show: true,
+                  position: [0, 15],
+                  shadowColor: 'rgba(30,30,30,.8)',
+                  shadowBlur: 2,
+                  shadowOffsetX: 1,
+                  shadowOffsety: 1,
                 },
               },
               {

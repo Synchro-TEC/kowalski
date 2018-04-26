@@ -4,7 +4,7 @@ import { view } from 'react-easy-state';
 import Area from '../../ui/area';
 import AreaTitle from '../../ui/areaTitle';
 import Collapsible from 'react-collapsible';
-import LineOption from './lineOption';
+import LineOption from '../options/series/line/lineOption';
 
 const Series = props => {
   return (

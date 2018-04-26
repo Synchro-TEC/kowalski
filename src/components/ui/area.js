@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const AreaStyled = styled.div`
   border: 1px solid #dcdcdc;
   margin-bottom: 13px;
-  box-shadow: 0px 4px 8px -3px rgba(17, 17, 17, 0.1);
+  box-shadow: 0 4px 8px -3px rgba(17, 17, 17, 0.1);
 `;
 
 const Area = props => {

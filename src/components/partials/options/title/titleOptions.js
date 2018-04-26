@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { view } from 'react-easy-state';
-import Values from '../../../echarts-props/options/values';
-import ColorPicker from '../../ui/colorPicker';
-import Area from '../../ui/area';
-import AreaTitle from '../../ui/areaTitle';
-import Switcher from '../../ui/switcher';
-import ElementPadding from '../../ui/elementPadding';
+import Values from '../../../../echarts-props/options/values';
+import ColorPicker from '../../../ui/colorPicker';
+import Area from '../../../ui/area';
+import AreaTitle from '../../../ui/areaTitle';
+import Switcher from '../../../ui/switcher';
+import ElementPadding from '../../../ui/elementPadding';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Collapsible from 'react-collapsible';
 

@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { view } from 'react-easy-state';
 import 'react-select/dist/react-select.css';
-import ElementPadding from '../../ui/elementPadding';
-import Area from '../../ui/area';
-import AreaTitle from '../../ui/areaTitle';
+import ElementPadding from '../../../ui/elementPadding';
+import Area from '../../../ui/area';
+import AreaTitle from '../../../ui/areaTitle';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Collapsible from 'react-collapsible';
 

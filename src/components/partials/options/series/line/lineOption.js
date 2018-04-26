@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { view } from 'react-easy-state';
-import Switcher from '../../../components/ui/switcher';
-import ImgLineNoSmooth from '../../../components/ui/images/ImgLineNoSmooth';
-import ImgLineSmooth from '../../../components/ui/images/ImgLineSmooth';
-import ColorPicker from '../../ui/colorPicker';
+import Switcher from '../../../../ui/switcher';
+import ImgLineNoSmooth from '../../../../ui/images/ImgLineNoSmooth';
+import ImgLineSmooth from '../../../../ui/images/ImgLineSmooth';
+import ColorPicker from '../../../../ui/colorPicker';
 
 const LineOption = props => {
   const { index, serie, store } = props;

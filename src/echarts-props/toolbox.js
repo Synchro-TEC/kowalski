@@ -7,10 +7,25 @@ export default {
       title: 'Reiniciar',
     },
     magicType: {
-      type: ['bar', 'line'],
+      type: ['bar', 'line', 'stack'],
       title: {
         bar: 'Barras',
         line: 'Linhas',
+        stack: 'Empilhada',
+      },
+      option: {
+        bar: {
+          label: {
+            show: true,
+            position: 'insideTop',
+          },
+        },
+        line: {
+          label: {
+            show: true,
+            position: [0, 15],
+          },
+        },
       },
     },
     saveAsImage: {
