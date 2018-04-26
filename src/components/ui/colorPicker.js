@@ -37,8 +37,7 @@ class ColorPicker extends React.Component {
     const color = this._extractRGBA(this.props.color);
     const styles = {
       color: {
-        width: '36px',
-        height: '14px',
+        height: `${this.props.colorHeight}px`,
         borderRadius: '2px',
         background: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
       },
@@ -46,9 +45,12 @@ class ColorPicker extends React.Component {
         padding: '5px',
         background: '#fff',
         borderRadius: '1px',
-        boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
         display: 'inline-block',
         cursor: 'pointer',
+        border: '1px solid #c0ccda',
+        boxShadow: 'inset 0 0 3px #e0e6ed',
+        height: '32px',
+        width: this.props.outerWidth,
       },
       popover: {
         position: 'absolute',
@@ -81,11 +83,15 @@ class ColorPicker extends React.Component {
 
 ColorPicker.defaultProps = {
   color: 'rgba(250,250,250,1)',
+  colorHeight: 21,
+  outerWidth: '50px',
 };
 
 ColorPicker.propTypes = {
   color: PropTypes.string,
   handleChange: PropTypes.func.isRequired,
+  colorHeight: PropTypes.number,
+  outerWidth: PropTypes.string,
 };
 
 export default ColorPicker;

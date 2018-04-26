@@ -127,7 +127,6 @@ let Store = store({
   queryExecuted: _ => {
     Store.lastExecutedQuery = new Date().getTime();
     Store.chart.dataset.source = Database.dataset;
-    debugger;
     Store.chart.series = [];
     Database.cols.forEach((col, index) => {
       if (index > 0) {

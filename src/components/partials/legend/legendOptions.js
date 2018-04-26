@@ -8,6 +8,7 @@ import Area from '../../ui/area';
 import AreaTitle from '../../ui/areaTitle';
 import Switcher from '../../ui/switcher';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import Collapsible from 'react-collapsible';
 // import 'react-tabs/style/react-tabs.css';
 
 const LegendOptions = props => {
@@ -29,48 +30,64 @@ const LegendOptions = props => {
 
   return (
     <Area>
-      <AreaTitle>Legenda</AreaTitle>
+      <Collapsible
+        trigger={
+          <AreaTitle>
+            Legenda
+            <i className="fa fa-fw fa-angle-double-down sv-pull-right" />
+          </AreaTitle>
+        }
+        triggerWhenOpen={
+          <AreaTitle>
+            Legenda
+            <i className="fa fa-fw fa-angle-double-up sv-pull-right" />
+          </AreaTitle>
+        }
+        transitionTime={200}
+        transitionCloseTime={100}
+        open={true}
+      >
+        <Tabs>
+          <TabList>
+            <Tab>Exibição</Tab>
+            <Tab>Posição</Tab>
+            <Tab>Margens</Tab>
+          </TabList>
 
-      <Tabs>
-        <TabList>
-          <Tab>Exibição</Tab>
-          <Tab>Posição</Tab>
-          <Tab>Margens</Tab>
-        </TabList>
+          <TabPanel>
+            <div className="sv-pa--15 sv-bg-color--white-1">
+              <Switcher
+                fields={Values.legend.type}
+                title="Exibição"
+                currentValue={props.store.chart.legend.type}
+                changeHandler={changeType}
+              />
+              <Switcher
+                fields={Values.legend.orient}
+                title="Orientação"
+                currentValue={props.store.chart.legend.orient}
+                changeHandler={changeOrientation}
+              />
+            </div>
+          </TabPanel>
 
-        <TabPanel>
-          <div className="sv-pa--15 sv-bg-color--white-1">
-            <Switcher
-              fields={Values.legend.type}
-              title="Exibição"
-              currentValue={props.store.chart.legend.type}
-              changeHandler={changeType}
-            />
-            <Switcher
-              fields={Values.legend.orient}
-              title="Orientação"
-              currentValue={props.store.chart.legend.orient}
-              changeHandler={changeOrientation}
-            />
-          </div>
-        </TabPanel>
-
-        <TabPanel>
-          <div className="sv-pa--15 sv-bg-color--white-1">
-            <Switcher
-              fields={Values.align}
-              title="Posição"
-              currentValue={props.store.chart.legend.left}
-              changeHandler={changeLegendPosition}
-            />
-          </div>
-        </TabPanel>
-        <TabPanel>
-          <div className="sv-form sv-pa--15 sv-bg-color--white-1">
-            <ElementPadding values={props.store.chart.legend.padding} handlerChange={changePadding} />
-          </div>
-        </TabPanel>
-      </Tabs>
+          <TabPanel>
+            <div className="sv-pa--15 sv-bg-color--white-1">
+              <Switcher
+                fields={Values.align}
+                title="Posição"
+                currentValue={props.store.chart.legend.left}
+                changeHandler={changeLegendPosition}
+              />
+            </div>
+          </TabPanel>
+          <TabPanel>
+            <div className="sv-form sv-pa--15 sv-bg-color--white-1">
+              <ElementPadding values={props.store.chart.legend.padding} handlerChange={changePadding} />
+            </div>
+          </TabPanel>
+        </Tabs>
+      </Collapsible>
     </Area>
   );
 };

@@ -8,6 +8,7 @@ const StyledTitle = styled.h5`
   margin: 0;
   text-align: center;
   font-size: 14px;
+  cursor: pointer;
 `;
 
 const AreaTitle = props => {
