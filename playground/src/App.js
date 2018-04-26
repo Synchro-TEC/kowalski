@@ -18,12 +18,12 @@ import './App.css';
 // ];
 
 class App extends Component {
-  constructor() {
-    super();
-    // this.state = {
-    //   data: [],
-    // };
-  }
+  // constructor() {
+  //   super();
+  //   // this.state = {
+  //   //   data: [],
+  //   // };
+  // }
 
   componentDidMount() {
     // console.time('lOAD-TIME');

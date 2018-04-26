@@ -23,4 +23,5 @@ export default {
     // right: 50,
     // bottom: '',
   },
+  choice: [{ label: 'Sim', value: true }, { label: 'Não', value: false }],
 };

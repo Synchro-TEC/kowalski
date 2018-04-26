@@ -7,7 +7,7 @@ import Article from './components/ui/article';
 import Styledmain from './components/ui/main';
 import ReactEcharts from 'echarts-for-react';
 import echarts from 'echarts';
-import SelectChartType from './components/partials/chartType/selectChartType';
+// import SelectChartType from './components/partials/chartType/selectChartType';
 import TitleOptions from './components/partials/options/title/titleOptions';
 import LegendOptions from './components/partials/options/legend/legendOptions';
 import ChartAreaOptions from './components/partials/options/chartArea/chartAreaOptions';
@@ -15,8 +15,10 @@ import Store from './store/mainStore';
 import Series from './components/partials/series/series';
 import AxisX from './components/partials/axisX/axisX';
 import AxisY from './components/partials/axisY/axisY';
-import DataView from './components/partials/data/dataView';
+// import DataView from './components/partials/data/dataView.js';
 import ColumnSelector from './components/partials/columnSelector/columnSelector';
+import XOptions from './components/partials/options/x/xOptions.js';
+import YOptions from './components/partials/options/y/yOptions.js';
 
 const Maincontainer = styled.div`
   height: 100%;
@@ -138,6 +140,8 @@ class Kowalski extends Component {
             <TitleOptions store={Store} />
             <LegendOptions store={Store} />
             <ChartAreaOptions store={Store} />
+            <XOptions store={Store} />
+            <YOptions store={Store} />
           </Aside>
         </Styledmain>
         <pre style={{ display: 'none' }}>{JSON.stringify(Store.chart, null, 2)}</pre>
