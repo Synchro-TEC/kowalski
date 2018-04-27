@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { view } from 'react-easy-state';
 import styled from 'styled-components';
@@ -24,25 +25,28 @@ const Maincontainer = styled.div`
   height: 100%;
   width: 100%;
   font-size: 12px !important;
-  display: box;
+  //display: box;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  position: fixed;
 `;
 
 const ChartBox = styled.div`
   border: 1px solid #dcdcdc;
-  box-shadow: 0px 4px 8px -3px rgba(17, 17, 17, 0.1);
+  box-shadow: 0 4px 8px -3px rgba(17, 17, 17, 0.1);
   background: #fff;
   margin-bottom: 13px;
+  position: sticky;
 `;
 
 const ButtonsBox = styled.div`
   border: 1px solid #dcdcdc;
-  box-shadow: 0px 4px 8px -3px rgba(17, 17, 17, 0.1);
+  box-shadow: 0 4px 8px -3px rgba(17, 17, 17, 0.1);
   background: #fff;
   height: 40px;
   padding: 5px;
+  position: sticky;
 `;
 
 class Kowalski extends Component {
@@ -81,11 +85,11 @@ class Kowalski extends Component {
 
   _calcChartHeight() {
     const dataViewHeight = this.props.showDataView ? this.sizes.dataView : 0;
-    const bodyHeight = document.body.offsetHeight;
+    const containerHeight = this.props.containerHeight;
     const calculatedPadding = this.sizes.articlePaddingTop + this.sizes.articlePaddingBottom;
     const calculatedMargins = this.sizes.articleMarginBottom;
     const calculateChartArea =
-      bodyHeight - calculatedPadding - calculatedMargins - this.sizes.buttonHeight - dataViewHeight;
+      containerHeight - calculatedPadding - calculatedMargins - this.sizes.buttonHeight - dataViewHeight;
 
     return `${calculateChartArea}px`;
   }
@@ -129,7 +133,11 @@ class Kowalski extends Component {
             <ButtonsBox>
               <div className="sv-row sv-ma--0 sv-pa--0">
                 <div className="sv-column">
-                  <button type="button" className="sv-button info small ">
+                  <button
+                    type="button"
+                    className="sv-button info small "
+                    onClick={() => this.props.onFinish(Store.chart)}
+                  >
                     Finalizar
                   </button>
                 </div>
@@ -152,9 +160,17 @@ class Kowalski extends Component {
   }
 }
 
+const calcHeight = () => {
+  const body = document.body;
+  const html = document.documentElement;
+  return Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+};
+
 Kowalski.defaultProps = {
   data: [],
   showDataView: false,
+  containerHeight: calcHeight(),
+  onFinish: opts => console.log(opts),
 };
 
 Kowalski.propTypes = {
@@ -163,6 +179,8 @@ Kowalski.propTypes = {
   allowSelectChart: PropTypes.bool,
   allowSelectData: PropTypes.bool,
   chart: PropTypes.object,
+  containerHeight: PropTypes.number,
+  onFinish: PropTypes.func,
   schema: PropTypes.arrayOf(
     PropTypes.shape({
       columnName: PropTypes.string,

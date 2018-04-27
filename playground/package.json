@@ -4,9 +4,12 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "echarts": "^4.0.4",
+    "echarts-for-react": "^2.0.8",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-scripts": "1.1.1"
+    "react-scripts": "1.1.1",
+    "react-skylight": "^0.5.1"
   },
   "scripts": {
     "start": "react-scripts start",
