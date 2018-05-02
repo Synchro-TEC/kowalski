@@ -131,9 +131,7 @@ class App extends Component {
 
   render() {
     const calcHeight = () => {
-      const body = document.body;
-      const html = document.documentElement;
-      return Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+      return Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
     };
 
     const modalHeight = calcHeight() - 80;
@@ -148,12 +146,12 @@ class App extends Component {
 
     return (
       <div className="app">
-        <section>
+        <section style={{ textAlign: 'center' }}>
           <ReactEcharts
             notMerge={true}
             option={this.state.chartOpts}
             echarts={echarts}
-            style={{ height: '500px', width: '500px' }}
+            style={{ height: '600px', width: '700px', margin: '0 auto' }}
           />
           <button onClick={() => this.simpleDialog.show()}>Opções do Gráfico</button>
         </section>
