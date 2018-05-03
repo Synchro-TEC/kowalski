@@ -31,8 +31,8 @@ const LineOption = props => {
       <div>
         <Switcher
           fields={[
-            { label: <ImgLineNoSmooth color={imgNoSmoothColor} />, value: 'reta' },
-            { label: <ImgLineSmooth color={imgSmoothColor} />, value: 'suave' },
+            { label: <ImgLineNoSmooth color={imgNoSmoothColor} />, value: 'reta', hint: 'Conexões Retas' },
+            { label: <ImgLineSmooth color={imgSmoothColor} />, value: 'suave', hint: 'Conexões Suaves' },
           ]}
           title="Tipo:"
           currentValue={lineType}

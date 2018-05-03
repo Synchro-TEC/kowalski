@@ -12,26 +12,18 @@ import ImgAlignOut from '../../../../ui/images/ImgAlignOut';
 const BarOption = props => {
   const { index, serie, store } = props;
 
-  const changeBarColor = color => {
-    store.updateSerieProp(index, 'itemStyle.color', color);
-  };
-
-  const changeBarWidth = e => {
-    store.updateSerieProp(index, 'barWidth', `${parseInt(e.target.value, 10)}%`);
-  };
+  const changeBarColor = color => store.updateSerieProp(index, 'itemStyle.color', color);
+  const changeBarWidth = e => store.updateSerieProp(index, 'barWidth', `${parseInt(e.target.value, 10)}%`);
+  const changeLabelPosition = value => store.updateSerieProp(index, 'label.normal.position', value);
 
   const changeLabelShow = value => {
     const val = value === 'true';
     store.updateSerieProp(index, 'label.normal.show', val);
   };
 
-  const changeLabelPosition = value => {
-    store.updateSerieProp(index, 'label.normal.position', value);
-  };
-
   return (
     <div style={{ borderWidth: '1px', borderStyle: 'solid' }} className="sv-bd-color--steel-200 sv-pa--5 sv-mb--5">
-      <p className="sv-fw-thin sv-text-center sv-ma--0">Opções da Linha</p>
+      <p className="sv-fw-thin sv-text-center sv-ma--0">Opções da Barra</p>
       <div>
         <Switcher
           fields={Values.choice}

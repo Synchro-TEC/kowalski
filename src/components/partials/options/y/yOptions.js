@@ -22,6 +22,8 @@ const yOptions = props => {
     props.store.setValue('chart.yAxis.axisLine.show', val);
   };
 
+  const changeRotate = e => props.store.setValue('chart.yAxis.axisLabel.rotate', e.target.value);
+
   return (
     <Area>
       <Collapsible
@@ -39,11 +41,12 @@ const yOptions = props => {
         }
         transitionTime={200}
         transitionCloseTime={100}
-        open={true}
+        open={false}
       >
         <Tabs>
           <TabList>
-            <Tab>Exibição</Tab>
+            <Tab>Linhas</Tab>
+            <Tab>Labels</Tab>
           </TabList>
 
           <TabPanel>
@@ -63,6 +66,44 @@ const yOptions = props => {
                     changeHandler={changeAxisLine}
                   />
                 </React.Fragment>
+              ) : (
+                ''
+              )}
+            </div>
+          </TabPanel>
+          <TabPanel>
+            <div className="sv-pa--15 sv-bg-color--white-1 sv-form">
+              {Object.keys(props.store.chart).includes('yAxis') ? (
+                <div className="sv-row--with-gutter">
+                  <div className="sv-column">
+                    <label className="sv-mb--0">
+                      Rotação:
+                      <input
+                        type="number"
+                        onChange={changeRotate}
+                        value={props.store.chart.yAxis.axisLabel.rotate}
+                        step="1"
+                        min="-90"
+                        max="90"
+                        maxLength="3"
+                      />
+                    </label>
+                  </div>
+                  <div className="sv-column">
+                    <label className="sv-mb--0">
+                      Tamanho:
+                      <input
+                        type="number"
+                        onChange={changeRotate}
+                        value={props.store.chart.yAxis.axisLabel.rotate}
+                        step="1"
+                        min="-90"
+                        max="90"
+                        maxLength="3"
+                      />
+                    </label>
+                  </div>
+                </div>
               ) : (
                 ''
               )}

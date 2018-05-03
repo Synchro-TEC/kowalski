@@ -45,7 +45,7 @@ const LegendOptions = props => {
         }
         transitionTime={200}
         transitionCloseTime={100}
-        open={true}
+        open={false}
       >
         <Tabs>
           <TabList>

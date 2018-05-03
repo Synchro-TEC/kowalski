@@ -29,7 +29,7 @@ const ChartAreaOptions = props => {
           </AreaTitle>
         }
         transitionTime={200}
-        open={true}
+        open={false}
       >
         <Tabs>
           <TabList>
