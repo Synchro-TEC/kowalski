@@ -132,7 +132,7 @@ class Kowalski extends Component {
             </ChartBox>
             <ButtonsBox>
               <div className="sv-row sv-ma--0 sv-pa--0">
-                <div className="sv-column">
+                <div className="sv-column sv-text-right">
                   <button
                     type="button"
                     className="sv-button info small "

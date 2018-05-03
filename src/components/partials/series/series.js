@@ -5,6 +5,7 @@ import Area from '../../ui/area';
 import AreaTitle from '../../ui/areaTitle';
 import Collapsible from 'react-collapsible';
 import LineOption from '../options/series/line/lineOption';
+import BarOption from '../options/series/bar/barOption';
 
 const Series = props => {
   return (
@@ -46,7 +47,8 @@ const Series = props => {
                 transitionTime={200}
                 transitionCloseTime={100}
               >
-                <LineOption serie={serie} store={props.store} index={i} />
+                {serie.type === 'line' ? <LineOption serie={serie} store={props.store} index={i} /> : ''}
+                {serie.type === 'bar' ? <BarOption serie={serie} store={props.store} index={i} /> : ''}
               </Collapsible>
             );
           })}

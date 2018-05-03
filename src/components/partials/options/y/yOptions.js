@@ -50,12 +50,12 @@ const yOptions = props => {
             <div className="sv-pa--15 sv-bg-color--white-1">
               {Object.keys(props.store.chart).includes('yAxis') ? (
                 <React.Fragment>
-                <Switcher
-                  fields={Values.choice}
-                  title="Exibir linhas guia"
-                  currentValue={props.store.chart.yAxis.splitLine.show}
-                  changeHandler={changeType}
-                />
+                  <Switcher
+                    fields={Values.choice}
+                    title="Exibir linhas guia"
+                    currentValue={props.store.chart.yAxis.splitLine.show}
+                    changeHandler={changeType}
+                  />
                   <Switcher
                     fields={Values.choice}
                     title="Exibir linha no eixo"

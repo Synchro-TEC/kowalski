@@ -98,15 +98,22 @@ class App extends Component {
           },
           {
             data: [240, 722, 1801, 734, 510, 1130, 321],
-            type: 'line',
+            type: 'bar',
+            barWidth: '80%',
             itemStyle: {
               color: 'rgba(255,0,17, 1)',
             },
             name: 'Débito',
-            lineStyle: {
-              width: 3,
+            label: {
+              normal: {
+                show: true,
+                position: 'insideTop',
+              },
             },
-            smooth: true,
+            // lineStyle: {
+            //   width: 3,
+            // },
+            // smooth: true,
           },
         ],
       },

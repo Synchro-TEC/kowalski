@@ -25,7 +25,7 @@ const SwitchField = styled.div`
     font-weight: normal;
     text-align: center;
     text-shadow: none;
-    padding: 6px 10px;
+    padding: 6px;
     border: 1px solid rgba(0, 0, 0, 0.2);
     -webkit-transition: all 0.1s ease-in-out;
     -moz-transition: all 0.1s ease-in-out;
@@ -83,7 +83,9 @@ const Switcher = props => {
             props.changeHandler(e.target.value);
           }}
         />
-        <label htmlFor={id}>{field.label}</label>
+        <label htmlFor={id} title={field.hint}>
+          {field.label}
+        </label>
       </React.Fragment>
     );
   });
@@ -102,6 +104,7 @@ Switcher.propTypes = {
     PropTypes.shape({
       label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
       value: PropTypes.any,
+      hint: PropTypes.string,
     })
   ),
   currentValue: PropTypes.any,

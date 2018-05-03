@@ -16,12 +16,18 @@ export default {
   ],
   link: { target: ['blank', 'self'] },
   legend: {
-    type: [{ label: 'Simples', value: 'plain' }, { label: 'Paginada', value: 'scroll' }],
-    orient: [{ label: 'Vertical', value: 'vertical' }, { label: 'Horizontal', value: 'horizontal' }],
+    type: [{ label: 'Simples', value: 'plain', hint: 'Simples' }, { label: 'Paginada', value: 'scroll', hint: 'Paginada' }],
+    orient: [{ label: 'Vertical', value: 'vertical', hint: 'Vertical' }, { label: 'Horizontal', value: 'horizontal', hint: 'Horizontal' }],
     // top: 50,
     // left: '',
     // right: 50,
     // bottom: '',
   },
-  choice: [{ label: 'Sim', value: true }, { label: 'Não', value: false }],
+  choice: [{ label: 'Sim', value: true, hint: 'Sim' }, { label: 'Não', value: false, hint: 'Não' }],
+  barLabelPositions: [
+    { label: 'Topo', value: 'insideTop' },
+    { label: 'Meio', value: 'inside' },
+    { label: 'Base', value: 'insideBottom' },
+    { label: 'Externo', value: 'top' },
+  ],
 };
