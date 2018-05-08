@@ -24,12 +24,16 @@ export default {
       { label: 'Vertical', value: 'vertical', hint: 'Vertical' },
       { label: 'Horizontal', value: 'horizontal', hint: 'Horizontal' },
     ],
-    // top: 50,
-    // left: '',
-    // right: 50,
-    // bottom: '',
   },
   choice: [{ label: 'Sim', value: true, hint: 'Sim' }, { label: 'Não', value: false, hint: 'Não' }],
+  axisXLabelPosition: [
+    { label: 'Base', value: 'bottom', hint: 'Exibir na base' },
+    { label: 'Topo', value: 'top', hint: 'Exibir no topo' },
+  ],
+  axisYLabelPosition: [
+    { label: 'Esquerda', value: 'left', hint: 'Exibir na esquerda' },
+    { label: 'Direita', value: 'right', hint: 'Exibir na direita' },
+  ],
   barLabelPositions: [
     { label: 'Topo', value: 'insideTop' },
     { label: 'Meio', value: 'inside' },

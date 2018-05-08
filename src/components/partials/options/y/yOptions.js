@@ -3,26 +3,19 @@ import PropTypes from 'prop-types';
 import { view } from 'react-easy-state';
 import 'react-select/dist/react-select.css';
 import Values from '../../../../echarts-props/options/values';
-// import ElementPadding from '../../../ui/elementPadding';
 import Area from '../../../ui/area';
 import AreaTitle from '../../../ui/areaTitle';
 import Switcher from '../../../ui/switcher';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Collapsible from 'react-collapsible';
-// import 'react-tabs/style/react-tabs.css';
+import ColorPicker from '../../../ui/colorPicker';
 
 const yOptions = props => {
-  const changeType = value => {
-    const val = value === 'true';
-    props.store.setValue('chart.yAxis.splitLine.show', val);
-  };
-
-  const changeAxisLine = value => {
-    const val = value === 'true';
-    props.store.setValue('chart.yAxis.axisLine.show', val);
-  };
-
+  const changeSplitLine = value => props.store.setValue('chart.yAxis.splitLine.show', value === 'true');
+  const changeAxisLine = value => props.store.setValue('chart.yAxis.axisLine.show', value === 'true');
   const changeRotate = e => props.store.setValue('chart.yAxis.axisLabel.rotate', e.target.value);
+  const changeLabelColor = color => props.store.setValue('chart.yAxis.axisLabel.color', color);
+  const changeLabelPosition = position => props.store.setValue('chart.yAxis.position', position);
 
   return (
     <Area>
@@ -46,7 +39,7 @@ const yOptions = props => {
         <Tabs>
           <TabList>
             <Tab>Linhas</Tab>
-            <Tab>Labels</Tab>
+            <Tab>Label</Tab>
           </TabList>
 
           <TabPanel>
@@ -57,13 +50,19 @@ const yOptions = props => {
                     fields={Values.choice}
                     title="Exibir linhas guia"
                     currentValue={props.store.chart.yAxis.splitLine.show}
-                    changeHandler={changeType}
+                    changeHandler={changeSplitLine}
                   />
                   <Switcher
                     fields={Values.choice}
                     title="Exibir linha no eixo"
                     currentValue={props.store.chart.yAxis.axisLine.show}
                     changeHandler={changeAxisLine}
+                  />
+                  <Switcher
+                    fields={Values.axisYLabelPosition}
+                    title="Posição do label"
+                    currentValue={props.store.chart.yAxis.position}
+                    changeHandler={changeLabelPosition}
                   />
                 </React.Fragment>
               ) : (
@@ -74,36 +73,35 @@ const yOptions = props => {
           <TabPanel>
             <div className="sv-pa--15 sv-bg-color--white-1 sv-form">
               {Object.keys(props.store.chart).includes('yAxis') ? (
-                <div className="sv-row--with-gutter">
-                  <div className="sv-column">
-                    <label className="sv-mb--0">
-                      Rotação:
-                      <input
-                        type="number"
-                        onChange={changeRotate}
-                        value={props.store.chart.yAxis.axisLabel.rotate}
-                        step="1"
-                        min="-90"
-                        max="90"
-                        maxLength="3"
-                      />
-                    </label>
+                <React.Fragment>
+                  <div className="sv-row--with-gutter sv-mb--0">
+                    <div className="sv-column">
+                      <label>
+                        Cor:
+                        <ColorPicker
+                          color={props.store.chart.yAxis.axisLabel.color}
+                          handleChange={changeLabelColor}
+                          height={21}
+                          outerWidth="100%"
+                        />
+                      </label>
+                    </div>
+                    <div className="sv-column">
+                      <label className="sv-mb--0">
+                        Rotação:
+                        <input
+                          type="number"
+                          onChange={changeRotate}
+                          value={props.store.chart.yAxis.axisLabel.rotate}
+                          step="1"
+                          min="-90"
+                          max="90"
+                          maxLength="3"
+                        />
+                      </label>
+                    </div>
                   </div>
-                  <div className="sv-column">
-                    <label className="sv-mb--0">
-                      Tamanho:
-                      <input
-                        type="number"
-                        onChange={changeRotate}
-                        value={props.store.chart.yAxis.axisLabel.rotate}
-                        step="1"
-                        min="-90"
-                        max="90"
-                        maxLength="3"
-                      />
-                    </label>
-                  </div>
-                </div>
+                </React.Fragment>
               ) : (
                 ''
               )}

@@ -11,18 +11,11 @@ import Collapsible from 'react-collapsible';
 import ColorPicker from '../../../ui/colorPicker';
 
 const xOptions = props => {
-  const changeSplitLine = value => {
-    const val = value === 'true';
-    props.store.setValue('chart.xAxis.splitLine.show', val);
-  };
-
-  const changeAxisLine = value => {
-    const val = value === 'true';
-    props.store.setValue('chart.xAxis.axisLine.show', val);
-  };
-
+  const changeSplitLine = value => props.store.setValue('chart.xAxis.splitLine.show', value === 'true');
+  const changeAxisLine = value => props.store.setValue('chart.xAxis.axisLine.show', value === 'true');
   const changeRotate = e => props.store.setValue('chart.xAxis.axisLabel.rotate', e.target.value);
   const changeLabelColor = color => props.store.setValue('chart.xAxis.axisLabel.color', color);
+  const changeLabelPosition = position => props.store.setValue('chart.xAxis.position', position);
 
   return (
     <Area>
@@ -65,6 +58,12 @@ const xOptions = props => {
                     currentValue={props.store.chart.xAxis.axisLine.show}
                     changeHandler={changeAxisLine}
                   />
+                  <Switcher
+                    fields={Values.axisXLabelPosition}
+                    title="Posição do label"
+                    currentValue={props.store.chart.xAxis.position}
+                    changeHandler={changeLabelPosition}
+                  />
                 </React.Fragment>
               ) : (
                 ''
@@ -74,33 +73,35 @@ const xOptions = props => {
           <TabPanel>
             <div className="sv-pa--15 sv-bg-color--white-1 sv-form">
               {Object.keys(props.store.chart).includes('xAxis') ? (
-                <div className="sv-row--with-gutter sv-mb--0">
-                  <div className="sv-column">
-                    <label>
-                      Cor:
-                      <ColorPicker
-                        color={props.store.chart.xAxis.axisLabel.color}
-                        handleChange={changeLabelColor}
-                        height={21}
-                        outerWidth="100%"
-                      />
-                    </label>
+                <React.Fragment>
+                  <div className="sv-row--with-gutter sv-mb--0">
+                    <div className="sv-column">
+                      <label>
+                        Cor:
+                        <ColorPicker
+                          color={props.store.chart.xAxis.axisLabel.color}
+                          handleChange={changeLabelColor}
+                          height={21}
+                          outerWidth="100%"
+                        />
+                      </label>
+                    </div>
+                    <div className="sv-column">
+                      <label className="sv-mb--0">
+                        Rotação:
+                        <input
+                          type="number"
+                          onChange={changeRotate}
+                          value={props.store.chart.xAxis.axisLabel.rotate}
+                          step="1"
+                          min="-90"
+                          max="90"
+                          maxLength="3"
+                        />
+                      </label>
+                    </div>
                   </div>
-                  <div className="sv-column">
-                    <label className="sv-mb--0">
-                      Rotação:
-                      <input
-                        type="number"
-                        onChange={changeRotate}
-                        value={props.store.chart.xAxis.axisLabel.rotate}
-                        step="1"
-                        min="-90"
-                        max="90"
-                        maxLength="3"
-                      />
-                    </label>
-                  </div>
-                </div>
+                </React.Fragment>
               ) : (
                 ''
               )}
