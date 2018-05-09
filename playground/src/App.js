@@ -1,127 +1,93 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Kowalski from 'kowalski';
-import SkyLight from 'react-skylight';
+import { SkyLightStateless } from 'react-skylight';
+import Proptypes from 'prop-types';
 import './App.css';
 import ReactEcharts from 'echarts-for-react';
 import echarts from 'echarts';
+import { view } from 'react-easy-state';
 
-import chart1 from './chart1';
-import chart2 from './chart2';
-import chart3 from './chart3';
-import chart4 from './chart4';
+const App = ({ store }) => {
+  const setCurrentChart = chartNumber => {
+    store.setCurrentChart(chartNumber);
+  };
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      chart1: chart1,
-      chart2: chart2,
-      chart3: chart3,
-      chart4: chart4,
-      currentChart: null,
-    };
-    this.updateChart = this.updateChart.bind(this);
-    this.editChart = this.editChart.bind(this);
-    this.getChartOptions = this.getChartOptions.bind(this);
-  }
+  const calcHeight = () => {
+    return Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+  };
 
-  componentDidMount() {}
+  const modalHeight = calcHeight() - 80;
 
-  editChart(chartId) {
-    let newState = this.state;
-    newState.currentChart = chartId;
-    debugger;
-    this.setState(newState, () => {
-      setTimeout(() => {
-        debugger;
-        this.simpleDialog.show();
-      }, 200);
-    });
-  }
+  const myBigDialog = {
+    width: '94%',
+    height: `${modalHeight}px`,
+    marginTop: `-${modalHeight / 2}px`,
+    marginLeft: '-47%',
+    padding: '0',
+  };
 
-  getChartOptions() {
-    debugger;
-    return Object.assign({}, this.state[this.state.currentChart]);
-  }
+  console.log(store.showModal);
 
-  updateChart(newchart) {
-    let newState = this.state;
-    newState[this.state.currentChart] = newchart;
-    this.setState(newState, () => this.simpleDialog.hide());
-  }
+  return (
+    <div className="app">
+      <section style={{ textAlign: 'center' }}>
+        <div style={{ width: '49%', float: 'left' }}>
+          <ReactEcharts
+            notMerge={true}
+            option={store.getChart('chart1')}
+            echarts={echarts}
+            style={{ height: '400px', margin: '0 auto' }}
+          />
+          <button onClick={() => setCurrentChart('chart1')}>Opções do Gráfico</button>
+        </div>
+        <div style={{ width: '49%', float: 'right' }}>
+          <ReactEcharts
+            notMerge={true}
+            option={store.getChart('chart2')}
+            echarts={echarts}
+            style={{ height: '400px', margin: '0 auto' }}
+          />
+          <button onClick={() => setCurrentChart('chart2')}>Opções do Gráfico</button>
+        </div>
+      </section>
+      <section style={{ textAlign: 'center' }}>
+        <div style={{ width: '49%', float: 'left' }}>
+          <ReactEcharts
+            notMerge={true}
+            option={store.getChart('chart3')}
+            echarts={echarts}
+            style={{ height: '400px', margin: '0 auto' }}
+          />
+          <button onClick={() => setCurrentChart('chart3')}>Opções do Gráfico</button>
+        </div>
+        <div style={{ width: '49%', float: 'right' }}>
+          <ReactEcharts
+            notMerge={true}
+            option={store.getChart('chart5')}
+            echarts={echarts}
+            style={{ height: '400px', margin: '0 auto' }}
+          />
+          <button onClick={() => setCurrentChart('chart5')}>Opções do Gráfico</button>
+        </div>
+      </section>
+      <SkyLightStateless dialogStyles={myBigDialog} isVisible={store.showModal}>
+        {store.showModal ? (
+          <Kowalski
+            appName="Kowalski Playground"
+            chart={store.getCurrentChart()}
+            containerHeight={modalHeight}
+            onFinish={store.updateChart}
+          />
+        ) : (
+          ''
+        )}
+      </SkyLightStateless>
+    </div>
+  );
+};
 
-  render() {
-    const calcHeight = () => {
-      return Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-    };
+App.propTypes = {
+  store: Proptypes.any,
+};
 
-    const modalHeight = calcHeight() - 80;
-
-    const myBigDialog = {
-      width: '94%',
-      height: `${modalHeight}px`,
-      marginTop: `-${modalHeight / 2}px`,
-      marginLeft: '-47%',
-      padding: '0',
-    };
-
-    return (
-      <div className="app">
-        <section style={{ textAlign: 'center' }}>
-          <div style={{ width: '49%', float: 'left' }}>
-            <ReactEcharts
-              notMerge={true}
-              option={this.state.chart1}
-              echarts={echarts}
-              style={{ height: '400px', margin: '0 auto' }}
-            />
-            <button onClick={() => this.editChart('chart1')}>Opções do Gráfico</button>
-          </div>
-          <div style={{ width: '49%', float: 'right' }}>
-            <ReactEcharts
-              notMerge={true}
-              option={this.state.chart2}
-              echarts={echarts}
-              style={{ height: '400px', margin: '0 auto' }}
-            />
-            <button onClick={() => this.editChart('chart2')}>Opções do Gráfico</button>
-          </div>
-        </section>
-        <section style={{ textAlign: 'center' }}>
-          <div style={{ width: '49%', float: 'left' }}>
-            <ReactEcharts
-              notMerge={true}
-              option={this.state.chart3}
-              echarts={echarts}
-              style={{ height: '400px', margin: '0 auto' }}
-            />
-            <button onClick={() => this.editChart('chart3')}>Opções do Gráfico</button>
-          </div>
-          <div style={{ width: '49%', float: 'right' }}>
-            <ReactEcharts
-              notMerge={true}
-              option={this.state.chart4}
-              echarts={echarts}
-              style={{ height: '400px', margin: '0 auto' }}
-            />
-            <button onClick={() => this.editChart('chart4')}>Opções do Gráfico</button>
-          </div>
-        </section>
-        <SkyLight dialogStyles={myBigDialog} ref={ref => (this.simpleDialog = ref)}>
-          {this.state.currentChart ? (
-            <Kowalski
-              appName="Kowalski Playground"
-              chart={this.getChartOptions()}
-              containerHeight={modalHeight}
-              onFinish={this.updateChart}
-            />
-          ) : (
-            ''
-          )}
-        </SkyLight>
-      </div>
-    );
-  }
-}
-
-export default App;
+export default view(App);

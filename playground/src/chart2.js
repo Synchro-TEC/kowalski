@@ -87,9 +87,11 @@ export default {
     {
       data: [240, 722, 1801, 734, 510, 1130, 321],
       type: 'line',
-      barWidth: '80%',
       itemStyle: {
         color: 'rgba(255,0,17, 1)',
+      },
+      lineStyle: {
+        width: 3,
       },
       name: 'Débito',
       label: {

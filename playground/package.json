@@ -8,6 +8,7 @@
     "echarts-for-react": "^2.0.8",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-easy-state": "^5.0.1",
     "react-scripts": "1.1.1",
     "react-skylight": "^0.5.1"
   },

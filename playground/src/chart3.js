@@ -62,8 +62,8 @@ export default {
   },
   series: [
     {
-      data: [820, 232, 901, 434, 1290, 2330, 754],
-      type: 'bar',
+      data: [420, 932, 901, 434, 290, 330, 754],
+      type: 'line',
       itemStyle: {
         color: 'rgba(68, 202, 104, 1)',
       },
@@ -85,7 +85,7 @@ export default {
       },
     },
     {
-      data: [240, 722, 1801, 734, 510, 1130, 321],
+      data: [240, 722, 4801, 73, 510, 1130, 321],
       type: 'bar',
       barWidth: '80%',
       itemStyle: {
