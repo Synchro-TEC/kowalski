@@ -70,7 +70,11 @@ const App = ({ store }) => {
           <button onClick={() => setCurrentChart('chart5')}>Opções do Gráfico</button>
         </div>
       </section>
-      <SkyLightStateless dialogStyles={myBigDialog} isVisible={store.showModal}>
+      <SkyLightStateless
+        dialogStyles={myBigDialog}
+        isVisible={store.showModal}
+        onCloseClicked={store.clearCurrentChart}
+      >
         {store.showModal ? (
           <Kowalski
             appName="Kowalski Playground"

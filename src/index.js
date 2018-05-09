@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import Aside from './components/ui/aside';
 import Article from './components/ui/article';
 import Styledmain from './components/ui/main';
+import Cancan from './components/ui/Cancan';
 import ReactEcharts from 'echarts-for-react';
 import echarts from 'echarts';
 // import SelectChartType from './components/partials/chartType/selectChartType';
@@ -100,61 +101,70 @@ class Kowalski extends Component {
       legendselectchanged: args => console.log(args),
     };
 
+    const hasChart = !!Object.keys(Store.chart).length;
+
     return (
       <Maincontainer>
-        <Styledmain>
-          <Aside>
-            {/*{this.props.allowSelectChart ? <SelectChartType store={Store} /> : ''}*/}
-            {Store.selectedPlot && Object.keys(Store.chart).includes('series') ? (
-              <React.Fragment>
-                <AxisX store={Store} /> <AxisY store={Store} />
-              </React.Fragment>
-            ) : (
-              ''
-            )}
-            {Object.keys(Store.chart).includes('series') && Store.chart.series.length ? <Series store={Store} /> : ''}
-            {Store.dataReceived ? <ColumnSelector store={Store} /> : ''}
-          </Aside>
-          <Article
-            style={{
-              padding: `${this.sizes.articlePaddingTop}px 0 ${this.sizes.articlePaddingBottom}px 0`,
-            }}
-          >
-            {/*<DataView store={Store} />*/}
-            <ChartBox>
-              <ReactEcharts
-                notMerge={true}
-                option={Store.chart}
-                echarts={echarts}
-                onEvents={onEvents}
-                style={{ height: this._calcChartHeight() }}
-              />
-            </ChartBox>
-            <ButtonsBox>
-              <div className="sv-row sv-ma--0 sv-pa--0">
-                <div className="sv-column sv-text-right">
-                  <button
-                    type="button"
-                    className="sv-button info small "
-                    onClick={() => this.props.onFinish(Store.chart)}
-                  >
-                    Finalizar
-                  </button>
+        <Cancan condition={hasChart}>
+          <Styledmain>
+            <Aside>
+              {/*{this.props.allowSelectChart ? <SelectChartType store={Store} /> : ''}*/}
+              {Store.selectedPlot && Object.keys(Store.chart).includes('series') ? (
+                <React.Fragment>
+                  <AxisX store={Store} /> <AxisY store={Store} />
+                </React.Fragment>
+              ) : (
+                ''
+              )}
+              {Object.keys(Store.chart).includes('series') && Store.chart.series.length ? <Series store={Store} /> : ''}
+              {Store.dataReceived ? <ColumnSelector store={Store} /> : ''}
+            </Aside>
+            <Article
+              style={{
+                padding: `${this.sizes.articlePaddingTop}px 0 ${this.sizes.articlePaddingBottom}px 0`,
+              }}
+            >
+              {/*<DataView store={Store} />*/}
+              <ChartBox>
+                <ReactEcharts
+                  notMerge={true}
+                  option={Store.chart}
+                  echarts={echarts}
+                  onEvents={onEvents}
+                  style={{ height: this._calcChartHeight() }}
+                />
+              </ChartBox>
+              <ButtonsBox>
+                <div className="sv-row sv-ma--0 sv-pa--0">
+                  <div className="sv-column sv-text-right">
+                    <button
+                      type="button"
+                      className="sv-button info small "
+                      onClick={() => {
+                        this.props.onFinish(Store.chart);
+                        Store.onFinish();
+                      }}
+                    >
+                      Finalizar
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </ButtonsBox>
-          </Article>
-          <Aside>
-            <TitleOptions store={Store} />
-            <LegendOptions store={Store} />
-            <ChartAreaOptions store={Store} />
-            <XOptions store={Store} />
-            <YOptions store={Store} />
-          </Aside>
-        </Styledmain>
-        <pre style={{ display: 'none' }}>{JSON.stringify(Store.chart, null, 2)}</pre>
-        <pre style={{ display: 'none' }}>{JSON.stringify(Store.data, null, 2)}</pre>
-        <pre style={{ display: 'none' }}>{JSON.stringify(Store.columns, null, 2)}</pre>
+              </ButtonsBox>
+            </Article>
+            <Aside>
+              <TitleOptions store={Store} />
+              <LegendOptions store={Store} />
+              <ChartAreaOptions store={Store} />
+              <Cancan condition={Store.chart.type !== 'pie'}>
+                <XOptions store={Store} />
+                <YOptions store={Store} />
+              </Cancan>
+            </Aside>
+          </Styledmain>
+          <pre style={{ display: 'none' }}>{JSON.stringify(Store.chart, null, 2)}</pre>
+          <pre style={{ display: 'none' }}>{JSON.stringify(Store.data, null, 2)}</pre>
+          <pre style={{ display: 'none' }}>{JSON.stringify(Store.columns, null, 2)}</pre>
+        </Cancan>
       </Maincontainer>
     );
   }

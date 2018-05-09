@@ -1,4 +1,4 @@
-export default {
+const createTitleOptions = () => ({
   show: true,
   text: '',
   link: '',
@@ -58,4 +58,6 @@ export default {
   shadowColor: null,
   shadowOffsetX: 0,
   shadowOffsetY: 0,
-};
+});
+
+export default createTitleOptions;

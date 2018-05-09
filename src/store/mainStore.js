@@ -1,5 +1,5 @@
 import { store } from 'react-easy-state';
-import titleProps from '../echarts-props/title';
+import createTitleOptions from '../echarts-props/title';
 import gridProps from '../echarts-props/grid';
 import toolboxProps from '../echarts-props/toolbox';
 import legendProps from '../echarts-props/legend';
@@ -23,34 +23,40 @@ let Store = store({
     aggregated: [],
   },
   series: null,
-  chart: {
-    title: titleProps,
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: {
-        type: 'shadow',
-        label: {
-          show: true,
-        },
-      },
-    },
-    grid: [gridProps],
-    toolbox: toolboxProps,
-    legend: legendProps,
-    dataset: {
-      source: [],
-    },
-    series: [],
-  },
+
+  chart: {},
   selectedPlot: null,
   axisXSeted: false,
   dataReceived: false,
+  createDefaultChart: () => {
+    let defaultChart = {
+      title: createTitleOptions(),
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow',
+          label: {
+            show: true,
+          },
+        },
+      },
+      grid: [gridProps],
+      toolbox: toolboxProps,
+      legend: legendProps,
+      series: [],
+    };
+
+    return Object.assign({}, defaultChart);
+  },
   initialize: chart => {
-    // debugger;
+    Store.chart = Store.createDefaultChart();
+    debugger;
     Object.keys(chart).forEach(key => {
       Store.chart[key] = chart[key];
     });
-    // Store.chart = chart;
+  },
+  onFinish: () => {
+    Store.chart = {};
   },
   updateGridOptions: gridValues => {
     Store.chart.grid[0].top = gridValues.top;

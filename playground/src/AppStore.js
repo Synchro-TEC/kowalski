@@ -18,12 +18,15 @@ let charts = {
 
 const appStore = store({
   currentChart: null,
+  currentChartId: null,
   showModal: false,
   setCurrentChart(chart) {
+    appStore.currentChartId = chart;
     appStore.currentChart = charts[chart];
     appStore.showModal = true;
   },
   clearCurrentChart() {
+    appStore.currentChartId = null;
     appStore.currentChart = null;
     appStore.showModal = false;
   },
@@ -34,7 +37,7 @@ const appStore = store({
     return charts[chartId];
   },
   updateChart(chart) {
-    charts[appStore.currentChart] = chart;
+    charts[appStore.currentChartId] = Object.assign({}, chart);
     appStore.clearCurrentChart();
   },
 });

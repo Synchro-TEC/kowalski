@@ -1,4 +1,5 @@
 export default {
+  type: 'bar',
   tooltip: {
     trigger: 'axis',
     axisPointer: {
