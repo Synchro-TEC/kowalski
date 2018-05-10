@@ -16,7 +16,12 @@ export default {
   },
   tooltip: {
     trigger: 'item',
-    formatter: '{a} <br/>{b}: {c} ({d}%)',
+    backgroundColor: 'rgba(255,255,255,1)',
+    padding: [3, 3],
+    textStyle: {
+      color: 'rgba(76,106,148,1)',
+    },
+    extraCssText: 'box-shadow: 0 0 5px rgba(0,0,0,0.3)',
   },
   legend: {
     orient: 'vertical',
@@ -28,16 +33,16 @@ export default {
       name: 'Status',
       type: 'pie',
       radius: ['50%', '70%'],
-      avoidLabelOverlap: false,
+      center: ['50%', '50%'],
       label: {
         normal: {
           show: false,
-          position: 'center',
+          // position: 'center',
         },
         emphasis: {
           show: true,
           textStyle: {
-            fontSize: '30',
+            // fontSize: '30',
             fontWeight: 'bold',
           },
         },
@@ -45,6 +50,9 @@ export default {
       labelLine: {
         normal: {
           show: false,
+        },
+        emphasis: {
+          show: true,
         },
       },
       data: [

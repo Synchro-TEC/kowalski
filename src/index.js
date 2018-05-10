@@ -17,6 +17,8 @@ import Store from './store/mainStore';
 import Series from './components/partials/series/series';
 import AxisX from './components/partials/axisX/axisX';
 import AxisY from './components/partials/axisY/axisY';
+import RadiusOptions from './components/partials/options/radius/radiusOptions';
+
 // import DataView from './components/partials/data/dataView.js';
 import ColumnSelector from './components/partials/columnSelector/columnSelector';
 import XOptions from './components/partials/options/x/xOptions.js';
@@ -109,15 +111,16 @@ class Kowalski extends Component {
           <Styledmain>
             <Aside>
               {/*{this.props.allowSelectChart ? <SelectChartType store={Store} /> : ''}*/}
-              {Store.selectedPlot && Object.keys(Store.chart).includes('series') ? (
-                <React.Fragment>
-                  <AxisX store={Store} /> <AxisY store={Store} />
-                </React.Fragment>
-              ) : (
-                ''
-              )}
-              {Object.keys(Store.chart).includes('series') && Store.chart.series.length ? <Series store={Store} /> : ''}
-              {Store.dataReceived ? <ColumnSelector store={Store} /> : ''}
+              <Cancan condition={!!Store.selectedPlot && Object.keys(Store.chart).includes('series')}>
+                <AxisX store={Store} />
+                <AxisY store={Store} />
+              </Cancan>
+              <Cancan condition={Object.keys(Store.chart).includes('series') && !!Store.chart.series.length}>
+                <Series store={Store} />
+              </Cancan>
+              <Cancan condition={Store.dataReceived}>
+                <ColumnSelector store={Store} />
+              </Cancan>
             </Aside>
             <Article
               style={{
@@ -158,6 +161,9 @@ class Kowalski extends Component {
               <Cancan condition={Store.chart.type !== 'pie'}>
                 <XOptions store={Store} />
                 <YOptions store={Store} />
+              </Cancan>
+              <Cancan condition={Store.chart.type === 'pie'}>
+                <RadiusOptions store={Store} />
               </Cancan>
             </Aside>
           </Styledmain>

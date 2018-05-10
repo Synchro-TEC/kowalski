@@ -70,6 +70,9 @@ let Store = store({
   setValue: (key, val) => {
     _set(Store, key, val);
   },
+  // setValueWithIndex: (index, key, val) => {
+  //   _set(Store, `${key}[${index}]`, val);
+  // },
   setData: data => {
     if (data.length) {
       Database.data = data;
