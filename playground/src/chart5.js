@@ -34,15 +34,14 @@ export default {
       type: 'pie',
       radius: ['50%', '70%'],
       center: ['50%', '50%'],
+      roseType: '',
       label: {
         normal: {
           show: false,
-          // position: 'center',
         },
         emphasis: {
           show: true,
           textStyle: {
-            // fontSize: '30',
             fontWeight: 'bold',
           },
         },

@@ -40,4 +40,15 @@ export default {
     { label: 'Base', value: 'insideBottom' },
     { label: 'Externo', value: 'top' },
   ],
+  pie: {
+    roseType: [
+      { label: 'Plano', value: '', hint: 'Plano' },
+      { label: 'Área', value: 'area', hint: 'Área' },
+      { label: 'Alcance', value: 'radius', hint: 'Alcance' },
+    ],
+    label: [
+      { label: 'Visível', value: true, hint: 'Sempre Visível.' },
+      { label: 'Interativo', value: false, hint: 'Ao passar o mouse sobre.' },
+    ],
+  },
 };

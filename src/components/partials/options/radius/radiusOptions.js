@@ -2,38 +2,40 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { view } from 'react-easy-state';
 import 'react-select/dist/react-select.css';
-// import Values from '../../../../echarts-props/options/values';
+import Values from '../../../../echarts-props/options/values';
 import Area from '../../../ui/area';
 import AreaTitle from '../../../ui/areaTitle';
-// import Switcher from '../../../ui/switcher';
+import Switcher from '../../../ui/switcher';
 // import Cancan from '../../../ui/Cancan';
 
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Collapsible from 'react-collapsible';
+
 // import ColorPicker from '../../../ui/colorPicker';
 
 const radiusOptions = props => {
-  // const changeSplitLine = value => props.store.setValue('chart.xAxis.splitLine.show', value === 'true');
-  // const changeAxisLine = value => props.store.setValue('chart.xAxis.axisLine.show', value === 'true');
-  // const changeRotate = e => props.store.setValue('chart.xAxis.axisLabel.rotate', e.target.value);
-  // const changeLabelColor = color => props.store.setValue('chart.xAxis.axisLabel.color', color);
+  const changeLabel = value => {
+    props.store.setValue('chart.series[0].label.normal.show', value === 'true');
+    props.store.setValue('chart.series[0].labelLine.normal.show', value === 'true');
+  };
   const changeInnerRadius = e => props.store.setValue('chart.series[0].radius[0]', `${e.target.value}%`);
   const changeOuterRadius = e => props.store.setValue('chart.series[0].radius[1]', `${e.target.value}%`);
   const changeVerticalAlign = e => props.store.setValue('chart.series[0].center[0]', `${e.target.value}%`);
   const changeHorizontalAlign = e => props.store.setValue('chart.series[0].center[1]', `${e.target.value}%`);
+  const changeRoseType = value => props.store.setValue('chart.series[0].roseType', value);
 
   return (
     <Area>
       <Collapsible
         trigger={
           <AreaTitle>
-            Raio
+            Pizza / Donut
             <i className="fa fa-fw fa-angle-double-down sv-pull-right" />
           </AreaTitle>
         }
         triggerWhenOpen={
           <AreaTitle>
-            Raio
+            Pizza / Donut
             <i className="fa fa-fw fa-angle-double-up sv-pull-right" />
           </AreaTitle>
         }
@@ -43,7 +45,8 @@ const radiusOptions = props => {
       >
         <Tabs>
           <TabList>
-            <Tab>Diâmetros</Tab>
+            <Tab>Raios</Tab>
+            <Tab>Exibição</Tab>
           </TabList>
 
           <TabPanel>
@@ -100,6 +103,23 @@ const radiusOptions = props => {
                   style={{ width: '100%' }}
                 />
               </label>
+            </div>
+          </TabPanel>
+          <TabPanel>
+            <div className="sv-pa--15 sv-bg-color--white-1 sv-form">
+              <Switcher
+                fields={Values.pie.roseType}
+                title="Formato"
+                currentValue={props.store.chart.series[0].roseType}
+                changeHandler={changeRoseType}
+              />
+
+              <Switcher
+                fields={Values.pie.label}
+                title="Rótulos"
+                currentValue={props.store.chart.series[0].label.normal.show}
+                changeHandler={changeLabel}
+              />
             </div>
           </TabPanel>
         </Tabs>
