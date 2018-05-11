@@ -73,12 +73,9 @@ export default {
         width: 3,
       },
       smooth: false,
-      markPoint: {
-        data: [{ type: 'max', name: 'Máximo' }, { type: 'min', name: 'Mínimo' }],
-      },
       label: {
         show: true,
-        position: [0, 15],
+        position: 'top',
         shadowColor: 'rgba(30,30,30,.8)',
         shadowBlur: 2,
         shadowOffsetX: 1,
@@ -96,10 +93,12 @@ export default {
       },
       name: 'Débito',
       label: {
-        normal: {
-          show: true,
-          position: 'insideTop',
-        },
+        show: true,
+        position: 'top',
+        shadowColor: 'rgba(30,30,30,.8)',
+        shadowBlur: 2,
+        shadowOffsetX: 1,
+        shadowOffsety: 1,
       },
     },
   ],

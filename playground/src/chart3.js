@@ -73,9 +73,9 @@ export default {
         width: 3,
       },
       smooth: false,
-      markPoint: {
-        data: [{ type: 'max', name: 'Máximo' }, { type: 'min', name: 'Mínimo' }],
-      },
+      // markPoint: {
+      //   data: [{ type: 'max', name: 'Máximo' }, { type: 'min', name: 'Mínimo' }],
+      // },
       label: {
         show: true,
         position: [0, 15],

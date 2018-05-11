@@ -7,6 +7,7 @@ import chart2 from './chart2';
 import chart3 from './chart3';
 import chart4 from './chart4';
 import chart5 from './chart5';
+import chart6 from './chart6';
 
 let charts = {
   chart1,
@@ -14,6 +15,7 @@ let charts = {
   chart3,
   chart4,
   chart5,
+  chart6,
 };
 
 const appStore = store({

@@ -63,11 +63,31 @@ const App = ({ store }) => {
         <div style={{ width: '49%', float: 'right' }}>
           <ReactEcharts
             notMerge={true}
+            option={store.getChart('chart4')}
+            echarts={echarts}
+            style={{ height: '400px', margin: '0 auto' }}
+          />
+          <button onClick={() => setCurrentChart('chart4')}>Opções do Gráfico</button>
+        </div>
+      </section>
+      <section style={{ textAlign: 'center' }}>
+        <div style={{ width: '49%', float: 'left' }}>
+          <ReactEcharts
+            notMerge={true}
             option={store.getChart('chart5')}
             echarts={echarts}
             style={{ height: '400px', margin: '0 auto' }}
           />
           <button onClick={() => setCurrentChart('chart5')}>Opções do Gráfico</button>
+        </div>
+        <div style={{ width: '49%', float: 'right' }}>
+          <ReactEcharts
+            notMerge={true}
+            option={store.getChart('chart6')}
+            echarts={echarts}
+            style={{ height: '400px', margin: '0 auto' }}
+          />
+          <button onClick={() => setCurrentChart('chart6')}>Opções do Gráfico</button>
         </div>
       </section>
       <SkyLightStateless
