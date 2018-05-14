@@ -211,6 +211,9 @@ let Store = store({
   updateSerieProp: (index, prop, value) => {
     _set(Store.chart.series[index], prop, value);
   },
+  updateSeriePieProp: (prop, value) => {
+    _set(Store.chart.series[0], prop, value);
+  },
 });
 
 export default Store;

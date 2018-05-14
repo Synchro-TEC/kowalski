@@ -15,6 +15,7 @@ import LegendOptions from './components/partials/options/legend/legendOptions';
 import ChartAreaOptions from './components/partials/options/chartArea/chartAreaOptions';
 import Store from './store/mainStore';
 import Series from './components/partials/series/series';
+import SeriePie from './components/partials/series/seriePie';
 import AxisX from './components/partials/axisX/axisX';
 import AxisY from './components/partials/axisY/axisY';
 import RadiusOptions from './components/partials/options/radius/radiusOptions';
@@ -116,7 +117,12 @@ class Kowalski extends Component {
                 <AxisY store={Store} />
               </Cancan>
               <Cancan condition={Object.keys(Store.chart).includes('series') && !!Store.chart.series.length}>
-                <Series store={Store} />
+                <Cancan condition={Store.chart.type !== 'pie'}>
+                  <Series store={Store} />
+                </Cancan>
+                <Cancan condition={Store.chart.type === 'pie'}>
+                  <SeriePie store={Store} />
+                </Cancan>
               </Cancan>
               <Cancan condition={Store.dataReceived}>
                 <ColumnSelector store={Store} />
