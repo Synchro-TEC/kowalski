@@ -209,6 +209,7 @@ let Store = store({
     Store.chart.dataset.dimensions.splice(index, 1);
   },
   updateSerieProp: (index, prop, value) => {
+    debugger;
     _set(Store.chart.series[index], prop, value);
   },
   updateSeriePieProp: (prop, value) => {

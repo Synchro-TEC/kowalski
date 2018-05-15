@@ -39,7 +39,7 @@ const appStore = store({
     return charts[chartId];
   },
   updateChart(chart) {
-    charts[appStore.currentChartId] = Object.assign({}, chart);
+    charts[appStore.currentChartId] = Object.assign({}, Object.create(null), chart);
     appStore.clearCurrentChart();
   },
 });

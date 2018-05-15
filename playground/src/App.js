@@ -26,8 +26,6 @@ const App = ({ store }) => {
     padding: '0',
   };
 
-  console.log(store.showModal);
-
   return (
     <div className="app">
       <section style={{ textAlign: 'center' }}>
