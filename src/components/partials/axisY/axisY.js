@@ -6,7 +6,7 @@ import AreaTitle from '../../ui/areaTitle';
 
 const AxisY = props => {
   let selectedValue = null;
-
+  debugger;
   const cols = props.store.columns.map((col, i) => (
     <option value={col} key={`col-${i}`}>
       {col}

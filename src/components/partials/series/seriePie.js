@@ -7,6 +7,7 @@ import Collapsible from 'react-collapsible';
 import PieOption from '../options/series/pie/pieOptions';
 
 const SeriePie = props => {
+  debugger;
   return (
     <Area>
       <Collapsible

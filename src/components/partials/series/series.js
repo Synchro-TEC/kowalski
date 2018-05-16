@@ -9,6 +9,7 @@ import BarOption from '../options/series/bar/barOption';
 import AreaOption from '../options/series/area/areaOption';
 
 const Series = props => {
+  debugger;
   return (
     <Area>
       <Collapsible
@@ -48,7 +49,7 @@ const Series = props => {
                 transitionTime={200}
                 transitionCloseTime={100}
               >
-                {serie.type === 'line' && props.store.chart.type === 'line' ? (
+                {serie.type === 'line' && props.store.chart.ktype === 'line' ? (
                   <LineOption serie={serie} store={props.store} index={i} />
                 ) : (
                   <AreaOption serie={serie} store={props.store} index={i} />

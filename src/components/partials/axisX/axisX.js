@@ -6,6 +6,7 @@ import AreaTitle from '../../ui/areaTitle';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 const AxisX = props => {
+  debugger;
   const cols = props.store.columns.map((col, i) => (
     <option value={col} key={`col-${i}`}>
       {col}

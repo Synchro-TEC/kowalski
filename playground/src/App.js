@@ -9,6 +9,7 @@ import { view } from 'react-easy-state';
 
 const App = ({ store }) => {
   const setCurrentChart = chartNumber => {
+    debugger;
     store.setCurrentChart(chartNumber);
   };
 
@@ -25,7 +26,7 @@ const App = ({ store }) => {
     marginLeft: '-47%',
     padding: '0',
   };
-
+  debugger;
   return (
     <div className="app">
       <section style={{ textAlign: 'center' }}>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { view } from 'react-easy-state';
 import styled from 'styled-components';
@@ -56,7 +56,7 @@ const ButtonsBox = styled.div`
 class Kowalski extends Component {
   constructor(props) {
     super(props);
-
+    debugger;
     this.sizes = {
       articlePaddingTop: 10,
       articlePaddingBottom: 13,
@@ -73,6 +73,7 @@ class Kowalski extends Component {
   }
 
   componentDidMount() {
+    debugger;
     // Store.setData(this.props.data);
     // Store.setColumns(this.props.schema);
     Store.initialize(this.props.chart);
@@ -99,13 +100,14 @@ class Kowalski extends Component {
   }
 
   render() {
+    debugger;
     let onEvents = {
       click: args => console.log(args),
       legendselectchanged: args => console.log(args),
     };
 
     const hasChart = !!Object.keys(Store.chart).length;
-
+    debugger;
     return (
       <Maincontainer>
         <Cancan condition={hasChart}>
@@ -117,10 +119,10 @@ class Kowalski extends Component {
                 <AxisY store={Store} />
               </Cancan>
               <Cancan condition={Object.keys(Store.chart).includes('series') && !!Store.chart.series.length}>
-                <Cancan condition={Store.chart.type !== 'pie'}>
+                <Cancan condition={Store.chart.ktype !== 'pie'}>
                   <Series store={Store} />
                 </Cancan>
-                <Cancan condition={Store.chart.type === 'pie'}>
+                <Cancan condition={Store.chart.ktype === 'pie'}>
                   <SeriePie store={Store} />
                 </Cancan>
               </Cancan>
@@ -163,12 +165,12 @@ class Kowalski extends Component {
             <Aside>
               <TitleOptions store={Store} />
               <LegendOptions store={Store} />
-              <ChartAreaOptions store={Store} />
-              <Cancan condition={Store.chart.type !== 'pie'}>
+              <Cancan condition={Store.chart.ktype !== 'pie'}>
+                <ChartAreaOptions store={Store} />
                 <XOptions store={Store} />
                 <YOptions store={Store} />
               </Cancan>
-              <Cancan condition={Store.chart.type === 'pie'}>
+              <Cancan condition={Store.chart.ktype === 'pie'}>
                 <RadiusOptions store={Store} />
               </Cancan>
             </Aside>

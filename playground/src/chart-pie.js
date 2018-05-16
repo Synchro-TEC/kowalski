@@ -1,5 +1,5 @@
 export default {
-  type: 'pie',
+  ktype: 'pie',
   toolbox: {
     right: 20,
     top: 20,

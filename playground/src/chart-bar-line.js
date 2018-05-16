@@ -1,5 +1,5 @@
 export default {
-  type: 'bar',
+  ktype: 'bar-line',
   tooltip: {
     trigger: 'axis',
     axisPointer: {
@@ -62,6 +62,26 @@ export default {
     },
   },
   series: [
+    {
+      data: [820, 232, 901, 434, 1290, 2330, 754],
+      type: 'line',
+      itemStyle: {
+        color: 'rgba(68, 202, 104, 1)',
+      },
+      name: 'Crédito',
+      lineStyle: {
+        width: 3,
+      },
+      smooth: false,
+      label: {
+        show: true,
+        position: [0, 15],
+        shadowColor: 'rgba(30,30,30,.8)',
+        shadowBlur: 2,
+        shadowOffsetX: 1,
+        shadowOffsety: 1,
+      },
+    },
     {
       data: [240, 722, 1801, 734, 510, 1130, 321],
       type: 'bar',
