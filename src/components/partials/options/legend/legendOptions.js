@@ -5,11 +5,11 @@ import 'react-select/dist/react-select.css';
 import Values from '../../../../echarts-props/options/values';
 import ElementPadding from '../../../ui/elementPadding';
 import Area from '../../../ui/area';
-import AreaTitle from '../../../ui/areaTitle';
 import Switcher from '../../../ui/switcher';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Collapsible from 'react-collapsible';
-// import 'react-tabs/style/react-tabs.css';
+import compnentsUtils from '../../../../utils/componentsUtils';
+import Title from '../../../../constants/titles';
 
 const LegendOptions = props => {
   const changeLegendPosition = value => {
@@ -31,18 +31,8 @@ const LegendOptions = props => {
   return (
     <Area>
       <Collapsible
-        trigger={
-          <AreaTitle>
-            Legenda
-            <i className="fa fa-fw fa-angle-double-down sv-pull-right" />
-          </AreaTitle>
-        }
-        triggerWhenOpen={
-          <AreaTitle>
-            Legenda
-            <i className="fa fa-fw fa-angle-double-up sv-pull-right" />
-          </AreaTitle>
-        }
+        trigger={compnentsUtils.generateColapsableTitle(Title.collapsible.legendOptions, 'closed')}
+        triggerWhenOpen={compnentsUtils.generateColapsableTitle(Title.collapsible.legendOptions, 'openned')}
         transitionTime={200}
         transitionCloseTime={100}
         open={false}

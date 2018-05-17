@@ -4,11 +4,12 @@ import { view } from 'react-easy-state';
 import 'react-select/dist/react-select.css';
 import Values from '../../../../echarts-props/options/values';
 import Area from '../../../ui/area';
-import AreaTitle from '../../../ui/areaTitle';
 import Switcher from '../../../ui/switcher';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Collapsible from 'react-collapsible';
 import ColorPicker from '../../../ui/colorPicker';
+import compnentsUtils from '../../../../utils/componentsUtils';
+import Title from '../../../../constants/titles';
 
 const yOptions = props => {
   const changeSplitLine = value => props.store.setValue('chart.yAxis.splitLine.show', value === 'true');
@@ -20,18 +21,8 @@ const yOptions = props => {
   return (
     <Area>
       <Collapsible
-        trigger={
-          <AreaTitle>
-            Eixo Y
-            <i className="fa fa-fw fa-angle-double-down sv-pull-right" />
-          </AreaTitle>
-        }
-        triggerWhenOpen={
-          <AreaTitle>
-            Eixo Y
-            <i className="fa fa-fw fa-angle-double-up sv-pull-right" />
-          </AreaTitle>
-        }
+        trigger={compnentsUtils.generateColapsableTitle(Title.collapsible.yOption, 'closed')}
+        triggerWhenOpen={compnentsUtils.generateColapsableTitle(Title.collapsible.yOption, 'openned')}
         transitionTime={200}
         transitionCloseTime={100}
         open={false}

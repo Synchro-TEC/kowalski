@@ -1,5 +1,5 @@
 export default {
-  type: 'area',
+  ktype: 'area',
   tooltip: {
     trigger: 'axis',
     axisPointer: {

@@ -4,14 +4,11 @@ import { view } from 'react-easy-state';
 import 'react-select/dist/react-select.css';
 import Values from '../../../../echarts-props/options/values';
 import Area from '../../../ui/area';
-import AreaTitle from '../../../ui/areaTitle';
 import Switcher from '../../../ui/switcher';
-// import Cancan from '../../../ui/Cancan';
-
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import compnentsUtils from '../../../../utils/componentsUtils';
+import Title from '../../../../constants/titles';
+import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import Collapsible from 'react-collapsible';
-
-// import ColorPicker from '../../../ui/colorPicker';
 
 const radiusOptions = props => {
   const changeLabel = value => {
@@ -27,18 +24,8 @@ const radiusOptions = props => {
   return (
     <Area>
       <Collapsible
-        trigger={
-          <AreaTitle>
-            Pizza / Donut
-            <i className="fa fa-fw fa-angle-double-down sv-pull-right" />
-          </AreaTitle>
-        }
-        triggerWhenOpen={
-          <AreaTitle>
-            Pizza / Donut
-            <i className="fa fa-fw fa-angle-double-up sv-pull-right" />
-          </AreaTitle>
-        }
+        trigger={compnentsUtils.generateColapsableTitle(Title.collapsible.radiusOptions, 'closed')}
+        triggerWhenOpen={compnentsUtils.generateColapsableTitle(Title.collapsible.radiusOptions, 'openned')}
         transitionTime={200}
         transitionCloseTime={100}
         open={false}

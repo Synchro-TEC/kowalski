@@ -4,11 +4,12 @@ import { view } from 'react-easy-state';
 import Values from '../../../../echarts-props/options/values';
 import ColorPicker from '../../../ui/colorPicker';
 import Area from '../../../ui/area';
-import AreaTitle from '../../../ui/areaTitle';
 import Switcher from '../../../ui/switcher';
 import ElementPadding from '../../../ui/elementPadding';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Collapsible from 'react-collapsible';
+import compnentsUtils from '../../../../utils/componentsUtils';
+import Title from '../../../../constants/titles';
 
 const TitleOptions = props => {
   const setTextColor = color => {
@@ -30,18 +31,8 @@ const TitleOptions = props => {
   return (
     <Area>
       <Collapsible
-        trigger={
-          <AreaTitle>
-            Títulos
-            <i className="fa fa-fw fa-angle-double-down sv-pull-right" />
-          </AreaTitle>
-        }
-        triggerWhenOpen={
-          <AreaTitle>
-            Títulos
-            <i className="fa fa-fw fa-angle-double-up sv-pull-right" />
-          </AreaTitle>
-        }
+        trigger={compnentsUtils.generateColapsableTitle(Title.collapsible.titleOptions, 'closed')}
+        triggerWhenOpen={compnentsUtils.generateColapsableTitle(Title.collapsible.titleOptions, 'openned')}
         transitionTime={200}
         transitionCloseTime={100}
         open={true}

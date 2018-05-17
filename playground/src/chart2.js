@@ -1,5 +1,5 @@
 export default {
-  type: 'line',
+  ktype: 'line',
   tooltip: {
     trigger: 'axis',
     axisPointer: {

@@ -117,10 +117,10 @@ class Kowalski extends Component {
                 <AxisY store={Store} />
               </Cancan>
               <Cancan condition={Object.keys(Store.chart).includes('series') && !!Store.chart.series.length}>
-                <Cancan condition={Store.chart.type !== 'pie'}>
+                <Cancan condition={Store.chart.ktype !== 'pie'}>
                   <Series store={Store} />
                 </Cancan>
-                <Cancan condition={Store.chart.type === 'pie'}>
+                <Cancan condition={Store.chart.ktype === 'pie'}>
                   <SeriePie store={Store} />
                 </Cancan>
               </Cancan>
@@ -163,12 +163,12 @@ class Kowalski extends Component {
             <Aside>
               <TitleOptions store={Store} />
               <LegendOptions store={Store} />
-              <ChartAreaOptions store={Store} />
-              <Cancan condition={Store.chart.type !== 'pie'}>
+              <Cancan condition={Store.chart.ktype !== 'pie'}>
+                <ChartAreaOptions store={Store} />
                 <XOptions store={Store} />
                 <YOptions store={Store} />
               </Cancan>
-              <Cancan condition={Store.chart.type === 'pie'}>
+              <Cancan condition={Store.chart.ktype === 'pie'}>
                 <RadiusOptions store={Store} />
               </Cancan>
             </Aside>
