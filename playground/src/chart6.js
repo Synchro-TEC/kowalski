@@ -5,10 +5,16 @@ export default {
     axisPointer: {
       type: 'shadow',
     },
+    backgroundColor: 'rgba(255,255,255,1)',
+    padding: [5, 10],
+    textStyle: {
+      color: 'rgba(76,106,148,1)',
+    },
+    extraCssText: 'box-shadow: 0 0 5px rgba(0,0,0,0.3); text-align: left;',
   },
   toolbox: {
-    right: 20,
-    top: 20,
+    right: 10,
+    top: 10,
     feature: {
       restore: {
         show: true,
@@ -33,7 +39,10 @@ export default {
   },
   legend: {
     data: ['Acesso Direto', 'Email Marketing', 'Publicidade/Aliança', 'Anuncio em Vídeo', 'Buscador'],
-    padding: [20, 0, 0, 20],
+    padding: [50, 20, 0, 20],
+    type: 'plain',
+    orient: 'vertical',
+    left: 'right',
   },
   xAxis: {
     type: 'value',
