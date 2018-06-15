@@ -44,7 +44,7 @@ const TitleOptions = props => {
             <Tab>Margens</Tab>
           </TabList>
           <TabPanel>
-            <div className="sv-form sv-pa--15">
+            <div className="sv-form sv-pa--15 sv-bg-color--white-1">
               <label>
                 Titulo:
                 <input
@@ -64,7 +64,7 @@ const TitleOptions = props => {
             </div>
           </TabPanel>
           <TabPanel>
-            <div className="sv-form sv-pa--15">
+            <div className="sv-form sv-pa--15 sv-bg-color--white-1">
               <label>
                 Cor do título:
                 <ColorPicker color={props.store.chart.title.textStyle.color} handleChange={setTextColor} />
@@ -82,7 +82,7 @@ const TitleOptions = props => {
             </div>
           </TabPanel>
           <TabPanel>
-            <div className="sv-form sv-pa--15">
+            <div className="sv-form sv-pa--15 sv-bg-color--white-1">
               <ElementPadding values={props.store.chart.title.padding} handlerChange={changePadding} />
             </div>
           </TabPanel>

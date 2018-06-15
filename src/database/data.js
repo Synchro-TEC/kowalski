@@ -40,7 +40,6 @@ class Database {
     const gGroup = grouped.map(gCol => `[${gCol.col}]`).join(',');
 
     const aGg = aggregated.map(aCol => `${aCol.fn}([${aCol.col}]) as ${aCol.col}`).join(',');
-    debugger;
     const selectQuery = aGg.length ? `${gSelect}, ${aGg}` : gSelect;
     const queryString = `SELECT ${selectQuery} FROM ? GROUP BY ${gGroup}`;
 

@@ -10,7 +10,6 @@ class Cancan extends React.Component {
   }
 
   render() {
-    debugger;
     return this.props.condition ? <React.Fragment>{this.renderChildren()}</React.Fragment> : '';
   }
 }

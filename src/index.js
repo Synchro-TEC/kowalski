@@ -148,7 +148,17 @@ class Kowalski extends Component {
                   <div className="sv-column sv-text-right">
                     <button
                       type="button"
-                      className="sv-button info small "
+                      className="sv-button link link-default small"
+                      onClick={() => {
+                        this.props.onCancel();
+                        Store.onFinish();
+                      }}
+                    >
+                      Cancelar
+                    </button>
+                    <button
+                      type="button"
+                      className="sv-button info small"
                       onClick={() => {
                         this.props.onFinish(Store.chart);
                         Store.onFinish();
@@ -203,6 +213,7 @@ Kowalski.propTypes = {
   chart: PropTypes.object,
   containerHeight: PropTypes.number,
   onFinish: PropTypes.func,
+  onCancel: PropTypes.func,
   schema: PropTypes.arrayOf(
     PropTypes.shape({
       columnName: PropTypes.string,

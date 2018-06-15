@@ -50,7 +50,6 @@ let Store = store({
   },
   initialize: chart => {
     Store.chart = Store.createDefaultChart();
-    debugger;
     Object.keys(chart).forEach(key => {
       Store.chart[key] = chart[key];
     });
@@ -209,11 +208,14 @@ let Store = store({
     Store.chart.dataset.dimensions.splice(index, 1);
   },
   updateSerieProp: (index, prop, value) => {
-    debugger;
-    _set(Store.chart.series[index], prop, value);
+    let serie = Store.chart.series[index];
+    _set(serie, prop, value);
   },
   updateSeriePieProp: (prop, value) => {
     _set(Store.chart.series[0], prop, value);
+  },
+  updateSeriePropBySerie(serie, prop, value) {
+    _set(serie, prop, value);
   },
 });
 

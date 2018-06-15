@@ -5,6 +5,7 @@ import Switcher from '../../../../ui/switcher';
 import ImgLineNoSmooth from '../../../../ui/images/ImgLineNoSmooth';
 import ImgLineSmooth from '../../../../ui/images/ImgLineSmooth';
 import ColorPicker from '../../../../ui/colorPicker';
+import _set from 'lodash/set';
 
 const LineOption = props => {
   const { index, serie, store } = props;
@@ -14,11 +15,11 @@ const LineOption = props => {
   };
 
   const changeLineColor = color => {
-    store.updateSerieProp(index, 'itemStyle.color', color);
+    _set(serie, 'itemStyle.color', color);
   };
 
   const changeLineWidth = e => {
-    store.updateSerieProp(index, 'lineStyle.width', parseInt(e.target.value, 10));
+    _set(serie, 'lineStyle.width', parseInt(e.target.value, 10));
   };
 
   const lineType = serie.smooth ? 'suave' : 'reta';
@@ -43,13 +44,27 @@ const LineOption = props => {
         <div className="sv-column">
           <label className="sv-mb--0">
             Cor:
-            <ColorPicker color={serie.itemStyle.color} handleChange={changeLineColor} height={21} outerWidth="100%" />
+            <ColorPicker
+              key={`color-picker-${index}`}
+              color={serie.itemStyle.color}
+              handleChange={changeLineColor}
+              height={21}
+              outerWidth="100%"
+            />
           </label>
         </div>
         <div className="sv-column">
           <label className="sv-mb--0">
             Espessura:
-            <input type="number" onChange={changeLineWidth} value={serie.lineStyle.width} step="1" min="1" max="10" />
+            <input
+              key={`change-line-${index}`}
+              type="number"
+              onChange={changeLineWidth}
+              value={serie.lineStyle.width}
+              step="1"
+              min="1"
+              max="10"
+            />
           </label>
         </div>
       </div>
