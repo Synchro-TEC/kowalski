@@ -4,7 +4,7 @@ const createTitleOptions = () => ({
   link: '',
   target: 'blank',
   textStyle: {
-    color: 'rgba( 33, 33, 33, 1)',
+    color: 'rgba( 56, 56, 56, 1)',
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontFamily: 'sans-serif',
