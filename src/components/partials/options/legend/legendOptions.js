@@ -28,6 +28,10 @@ const LegendOptions = props => {
     props.store.setValue('chart.legend.type', value);
   };
 
+  const changeVisible = value => {
+    props.store.setValue('chart.legend.show', value === 'true');
+  };
+
   return (
     <Area>
       <Collapsible
@@ -46,6 +50,12 @@ const LegendOptions = props => {
 
           <TabPanel>
             <div className="sv-pa--15 sv-bg-color--white-1">
+              <Switcher
+                fields={Values.choice}
+                title="Visível"
+                currentValue={props.store.chart.legend.show}
+                changeHandler={changeVisible}
+              />
               <Switcher
                 fields={Values.legend.type}
                 title="Exibição"
