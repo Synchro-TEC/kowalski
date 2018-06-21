@@ -12,7 +12,7 @@ export default {
   orient: 'horizontal',
   align: 'right',
   textStyle: {
-    color: 'rgba(66,66,66, .9)',
+    color: '',
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontFamily: 'sans-serif',
@@ -36,7 +36,7 @@ export default {
   itemHeight: 14,
   formatter: null,
   selectedMode: true,
-  inactiveColor: 'rgba(66,66,66,.4)',
+  inactiveColor: '',
   backgroundColor: 'transparent',
   borderColor: '',
   borderWidth: 0,

@@ -4,7 +4,7 @@ const createTitleOptions = () => ({
   link: '',
   target: 'blank',
   textStyle: {
-    color: 'rgba( 56, 56, 56, 1)',
+    color: '',
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontFamily: 'sans-serif',
@@ -25,7 +25,7 @@ const createTitleOptions = () => ({
   sublink: '',
   subtarget: 'blank',
   subtextStyle: {
-    color: 'rgba( 200, 200, 200, 1)',
+    color: '',
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontFamily: 'sans-serif',
@@ -51,7 +51,7 @@ const createTitleOptions = () => ({
   right: 'auto',
   bottom: 'auto',
   backgroundColor: 'transparent',
-  borderColor: 'rgba( 66, 66, 66, 1)',
+  borderColor: '',
   borderWidth: 0,
   borderRadius: 0,
   shadowBlur: null,
