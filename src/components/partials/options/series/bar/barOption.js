@@ -18,11 +18,11 @@ const BarOption = props => {
   const changeBarColor = color => store.updateSerieProp(index, 'itemStyle.color', color);
   const changeBarWidth = e => store.updateSerieProp(index, 'barWidth', `${parseInt(e.target.value, 10)}%`);
   // const changeBarHeiht = e => store.updateSerieProp(index, 'barCategoryGap', `${parseInt(e.target.value, 10)}%`);
-  const changeLabelPosition = value => store.updateSerieProp(index, 'label.normal.position', value);
+  const changeLabelPosition = value => store.updateSerieProp(index, 'label.position', value);
 
   const changeLabelShow = value => {
     const val = value === 'true';
-    store.updateSerieProp(index, 'label.normal.show', val);
+    store.updateSerieProp(index, 'label.show', val);
   };
 
   let alignFields;
@@ -77,13 +77,13 @@ const BarOption = props => {
         <Switcher
           fields={Values.choice}
           title="Exibir Label:"
-          currentValue={serie.label.normal.show}
+          currentValue={serie.label.show}
           changeHandler={changeLabelShow}
         />
         <Switcher
           fields={alignFields}
           title="Posição do Label:"
-          currentValue={serie.label.normal.position}
+          currentValue={serie.label.position}
           changeHandler={changeLabelPosition}
         />
       </div>
