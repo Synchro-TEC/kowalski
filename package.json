@@ -1,6 +1,6 @@
 {
   "name": "kowalski",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Kowalski Report!",
   "main": "lib/index.js",
   "scripts": {

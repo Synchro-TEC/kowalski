@@ -7,8 +7,8 @@ const Styledaside = styled.aside`
   -webkit-box-flex: 1;
   -o-box-flex: 1;
   box-flex: 1;
-  -ms-flex: 0 0 270px;
-  flex: 0 0 270px;
+  -ms-flex: 0 0 290px;
+  flex: 0 0 290px;
   background: #f7f7f7;
   padding: 10px;
 `;

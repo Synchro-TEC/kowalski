@@ -568,7 +568,7 @@ class Kowalski extends Component {
     window.addEventListener('resize', this._fireResize);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     Store.setData(nextProps.data);
   }
 
