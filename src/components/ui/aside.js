@@ -12,13 +12,20 @@ const Styledaside = styled.aside`
   background: #f7f7f7;
   padding: 10px;
 `;
+//-ms-flex: 0 0 ${props => (props.allowSeriesChange ? '270px' : '0')};
+//flex: 0 0 ${ props => (props.allowSeriesChange ? '540px' : '0') };
 
 const Aside = props => {
-  return <Styledaside style={props.style}>{props.children}</Styledaside>;
+  return (
+    <Styledaside style={props.style} allowSeriesChange={props.allowSeriesChange}>
+      {props.children}
+    </Styledaside>
+  );
 };
 
 Aside.propTypes = {
   style: PropTypes.object,
+  allowSeriesChange: PropTypes.any,
 };
 
 export default Aside;

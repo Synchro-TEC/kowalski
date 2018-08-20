@@ -10,7 +10,8 @@
     "react-dom": "^16.2.0",
     "react-easy-state": "^5.0.1",
     "react-scripts": "1.1.1",
-    "react-skylight": "^0.5.1"
+    "react-skylight": "^0.5.1",
+    "styled-components": "^3.4.2"
   },
   "scripts": {
     "start": "PORT=3010 react-scripts start",

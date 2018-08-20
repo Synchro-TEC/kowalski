@@ -599,28 +599,35 @@ class Kowalski extends Component {
       <Maincontainer>
         <Cancan condition={hasChart}>
           <Styledmain>
-            <Aside>
-              {/*{this.props.allowSelectChart ? <SelectChartType store={Store} /> : ''}*/}
-              <Cancan condition={!!Store.selectedPlot && Object.keys(Store.chart).includes('series')}>
-                <AxisX store={Store} />
-                <AxisY store={Store} />
-              </Cancan>
-              <Cancan condition={Object.keys(Store.chart).includes('series') && !!Store.chart.series.length}>
-                <Cancan condition={Store.chart.ktype !== 'pie'}>
-                  <Series store={Store} />
+            {this.props.allowSeriesChange ? (
+              <Aside>
+                {/*{this.props.allowSelectChart ? <SelectChartType store={Store} /> : ''}*/}
+                <Cancan condition={!!Store.selectedPlot && Object.keys(Store.chart).includes('series')}>
+                  <AxisX store={Store} />
+                  <AxisY store={Store} />
                 </Cancan>
-                <Cancan condition={Store.chart.ktype === 'pie'}>
-                  <SeriePie store={Store} />
+                <Cancan condition={Object.keys(Store.chart).includes('series') && !!Store.chart.series.length}>
+                  <Cancan condition={Store.chart.ktype !== 'pie'}>
+                    <Series store={Store} />
+                  </Cancan>
+                  <Cancan condition={Store.chart.ktype === 'pie'}>
+                    <SeriePie store={Store} />
+                  </Cancan>
                 </Cancan>
-              </Cancan>
-              <Cancan condition={Store.dataReceived}>
-                <ColumnSelector store={Store} />
-              </Cancan>
-            </Aside>
+                <Cancan condition={Store.dataReceived}>
+                  <ColumnSelector store={Store} />
+                </Cancan>
+              </Aside>
+            ) : (
+              ''
+            )}
+
             <Article
               style={{
                 padding: `${this.sizes.articlePaddingTop}px 0 ${this.sizes.articlePaddingBottom}px 0`,
+                margin: !this.props.allowSeriesChange ? '0 0 0 10px' : '0',
               }}
+              allowSeriesChange={this.props.allowSeriesChange}
             >
               {/*<DataView store={Store} />*/}
               <ChartBox>
@@ -691,6 +698,8 @@ const calcHeight = () => {
 Kowalski.defaultProps = {
   data: [],
   showDataView: false,
+  allowSelectData: false,
+  allowSeriesChange: false,
   containerHeight: calcHeight(),
   onFinish: opts => console.log(opts),
 };
@@ -700,6 +709,7 @@ Kowalski.propTypes = {
   appName: PropTypes.string.isRequired,
   allowSelectChart: PropTypes.bool,
   allowSelectData: PropTypes.bool,
+  allowSeriesChange: PropTypes.bool,
   chart: PropTypes.object,
   containerHeight: PropTypes.number,
   onFinish: PropTypes.func,

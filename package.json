@@ -1,6 +1,6 @@
 {
   "name": "kowalski",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Kowalski Report!",
   "main": "lib/index.js",
   "scripts": {
@@ -16,11 +16,12 @@
     "Chart",
     "E-charts"
   ],
-  "author": "Marcio Gasparotto",
+  "author": "Synchro",
   "license": "MIT",
   "peerDependencies": {
     "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "react-dom": "^16.0.0",
+    "styled-components": "^3.4.0"
   },
   "bugs": {
     "url": "https://github.com/Synchro-TEC/kowalski/issues"
@@ -54,7 +55,6 @@
     "react-handsontable": "^0.3.1",
     "react-json-tree": "^0.11.0",
     "react-select": "^1.2.1",
-    "react-tabs": "^2.2.2",
-    "styled-components": "^3.2.6"
+    "react-tabs": "^2.2.2"
   }
 }
