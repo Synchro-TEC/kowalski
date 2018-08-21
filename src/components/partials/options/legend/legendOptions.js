@@ -39,7 +39,7 @@ const LegendOptions = props => {
         triggerWhenOpen={compnentsUtils.generateColapsableTitle(Title.collapsible.legendOptions, 'openned')}
         transitionTime={200}
         transitionCloseTime={100}
-        open={false}
+        open={true}
       >
         <Tabs>
           <TabList>

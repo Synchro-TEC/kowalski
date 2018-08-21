@@ -675,9 +675,9 @@ class Kowalski extends Component {
                 <XOptions store={Store} />
                 <YOptions store={Store} />
               </Cancan>
-              <Cancan condition={Store.chart.ktype === 'pie'}>
+              {/* <Cancan condition={Store.chart.ktype === 'pie'}>
                 <RadiusOptions store={Store} />
-              </Cancan>
+              </Cancan> */}
             </Aside>
           </Styledmain>
           <pre style={{ display: 'none' }}>{JSON.stringify(Store.chart, null, 2)}</pre>
